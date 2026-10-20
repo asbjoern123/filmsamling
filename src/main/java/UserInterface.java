@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class UserInterface {
     Scanner scanner = new Scanner(System.in);
@@ -34,10 +35,29 @@ public void createMovie(){
     String genre = scanner.nextLine();
     controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
 }
-public void deleteMovie(){}
-public void searchMovies(){}
-public void showAllMovies(){}
-public void editMovie(){}
+public void deleteMovie(){
+
+}
+
+public void searchMovies(){
+
+}
+
+public void showAllMovies(){
+    ArrayList<Movie> movies = controller.getMovies();
+    if (movies.isEmpty()){
+        System.out.println("Filmlisten er tom");
+        }
+    else {
+        for (Movie movie : movies) {
+            System.out.println(movie.getTitle() + " af " + movie.getDirector() + " , genren: " + movie.getGenre() + " fra " + movie.getYearCreated() + " på " + movie.getLengthInMinutes() + " Minutter.");
+        }
+    }
+}
+public void editMovie(){
+
+}
+
 public void printinfo(){
     System.out.println("press 1 to createMovie");
     System.out.println("press 2 to showAllMovies");
