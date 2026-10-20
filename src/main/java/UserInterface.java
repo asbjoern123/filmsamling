@@ -6,8 +6,8 @@ public class UserInterface {
     public boolean running = true;
 public void startProgram(){
     while (running){
-        String choice = scanner.nextLine().trim();
         printinfo();
+        String choice = scanner.nextLine().trim();
         switch (choice) {
             case "1" -> createMovie();
             case "2" -> showAllMovies();
@@ -39,6 +39,11 @@ public void createMovie(){
     controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
 }
 public void deleteMovie(){
+    System.out.println("hvilken film ville du slette");
+    String title = scanner.nextLine();
+    if()
+    for(Movie movie: controller.getMovies())
+    controller.deleteMovie(movie);
 
 }
 
