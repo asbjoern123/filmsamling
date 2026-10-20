@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         System.out.println("Velkommen til min filmsamling");
-        UserInterface userInterfac = new UserInterfac;
+        UserInterface userInterface = new UserInterface();
 
 
     }
