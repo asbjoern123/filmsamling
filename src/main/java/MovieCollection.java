@@ -6,28 +6,34 @@ public class MovieCollection {
     public ArrayList<Movie> getMovies() {
         return movies;
     }
-    public addMovie(String titel, String genre){
-        movies.add(movie(titel,genre));
+    public void addMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre){
+        movies.add(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre));
 
     }
-    public int getNumbreOfMovies(){
+    public int getNumberOfMovies(){
+
         return movies.size();
     }
-    public boolean deleteMovie(String titel) {
+    public boolean deleteMovie(String title) {
         for (Movie movie : movies) {
-            if (titel.equals(movie.getTitle())) {
+            if (title.equals(movie.getTitle())) {
                 movies.remove(movie.getTitle());
+                return true;
             }
         }
         return false;
     }
-    public boolean editeMovie(){
+    public boolean editMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre)
+    {
+        movies.add(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre));
         return false;
     }
-    public boolean searchMovies(String SearchText){
+
+    public boolean searchMovies(String searchText){
         for(Movie movie:movies){
-            if(SearchText.equals(movies.getTitle())){
-                return movie.getTitle();
+            if(searchText.equals(movie.getTitle()))
+            {
+                return true;
             }
         }
         return false;
