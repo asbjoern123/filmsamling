@@ -1,6 +1,8 @@
 public class Main {
-    static void main(String[] args) {
+    public static void main(String[] args) {
         System.out.println("Velkommen til min filmsamling");
+        UserInterface userInterfac = new UserInterfac;
+
 
     }
 
