@@ -19,8 +19,19 @@ public void startProgram(){
     }
 
 }
+public void createMovie(){
+    System.out.println("skrive en title");
+    String title = scanner.nextLine();
+    System.out.println("skrive en director");
+    String director = scanner.nextLine();
+    System.out.println("skrive udgivelses år");
+    int year
+    System.out.println("er filem i farve");
+    System.out.println("hvor lang er filmen i minutter");
+    System.out.println("skrive en genren");
+    controller.addMovie(title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre));
+}
 public void deleteMovie(){}
-public void createMovie(){}
 public void searchMovies(){}
 public void showAllMovies(){}
 public void editMovie(){}

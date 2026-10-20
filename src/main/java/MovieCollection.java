@@ -29,14 +29,14 @@ public class MovieCollection {
         return false;
     }
 
-    public boolean searchMovies(String searchText){
+    public ArrayList searchMovies(String searchText){
         for(Movie movie:movies){
             if(searchText.equals(movie.getTitle()))
             {
-                return true;
+                return movies;
             }
         }
-        return false;
+        return null;
     }
 
 }
