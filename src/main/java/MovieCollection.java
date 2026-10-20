@@ -15,8 +15,8 @@ public class MovieCollection {
     }
     public boolean deleteMovie(String titel) {
         for (Movie movie : movies) {
-            if (titel.equals(movie.getTitel)) {
-                movies.remove(movie.getTitel);
+            if (titel.equals(movie.getTitle())) {
+                movies.remove(movie.getTitle());
             }
         }
         return false;
@@ -26,8 +26,8 @@ public class MovieCollection {
     }
     public boolean searchMovies(String SearchText){
         for(Movie movie:movies){
-            if(SearchText.equals(movies.getTitel)){
-                return movie.getTitel;
+            if(SearchText.equals(movies.getTitle())){
+                return movie.getTitle();
             }
         }
         return false;
