@@ -48,6 +48,33 @@ public void deleteMovie(){
 }
 
 public void searchMovies(){
+System.out.print("Søg efter titel: ");
+        String searchText = scanner.nextLine();
+
+        ArrayList<Movie> matches = controller.searchMovies(searchText);
+
+        if (matches.isEmpty()) {
+            System.out.println("Ingen film matcher din søgning.");
+            return;
+        }
+
+        for (Movie movie ; matches) {
+            String color;
+
+            if (movie.isInColor()) {
+                color = "farver";
+            } else {
+                color = "sort-hvid";
+            }
+
+            System.out.println("Titel: " + movie.getTitle());
+            System.out.println("Instruktør: " + movie.getDirector());
+            System.out.println("Årstal: " + movie.getYearCreated());
+            System.out.println("Farver: " + color);
+            System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
+            System.out.println("Genre: "movie.getGenre());
+            System.out.println();
+        }
 
 }
 
