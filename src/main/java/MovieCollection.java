@@ -3,6 +3,9 @@ import java.util.ArrayList;
 public class MovieCollection {
     private ArrayList<Movie> movies;
 
+    public MovieCollection(){
+        this.movies = new ArrayList<>();
+    }
     public ArrayList<Movie> getMovies() {
         return movies;
     }
