@@ -5,6 +5,7 @@ public class UserInterface {
     Controller controller = new Controller();
     public boolean running = true;
 public void startProgram(){
+    System.out.println("Velkommen til min filmsamling");
     while (running){
         printinfo();
         String choice = scanner.nextLine().trim();
@@ -18,7 +19,7 @@ public void startProgram(){
             default -> System.out.println("Ukendt valg: " + choice);
         }
     }
-
+    System.out.println("Tak for denne gang");
 }
 public void createMovie(){
     System.out.print("Skriv en title:");
