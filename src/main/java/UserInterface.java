@@ -19,25 +19,31 @@ public void startProgram(){
             default -> System.out.println("Ukendt valg: " + choice);
         }
     }
-    System.out.println("Tak for denne gang");
+    System.out.println("Tak for denne gang.");
 }
 public void createMovie(){
-    System.out.print("Skriv en title:");
+    System.out.print("Skriv en titel.");
     String title = scanner.nextLine();
-    System.out.println("Skriv en instruktør");
+
+    System.out.println("Skriv en instruktør.");
     String director = scanner.nextLine();
-    System.out.println("Skriv udgivelses år");
+
+    System.out.println("Skriv udgivelses år.");
     int yearCreated = scanner.nextInt();
     scanner.nextLine();
-    System.out.println("Er filmen i farve skriv enten true eller false");
-    boolean inColor = scanner.nextBoolean();
-    scanner.nextLine();
-    System.out.println("Hvor lang er filmen i minutter");
+
+    System.out.println("Er filmen i farve (ja/nej).");
+    String svar = scanner.nextLine();
+    boolean inColor = svar.equalsIgnoreCase("ja");
+
+    System.out.println("Hvor lang er filmen i minutter?");
     int lengthInMinutes = scanner.nextInt();
     scanner.nextLine();
-    System.out.println("Skriv en genre");
+
+    System.out.println("Skriv en genre.");
     String genre = scanner.nextLine();
     controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
+    System.out.println(title + " er tilføjet til samlingen.");
 }
 public void deleteMovie(){
     System.out.println("Hvilken film vil du slette?");
