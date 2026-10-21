@@ -26,14 +26,16 @@ public class MovieCollection {
         return false;
     }
 
-    public ArrayList searchMovies(String searchText){
+    public ArrayList<Movie> searchMovies(String searchText){
+        ArrayList<Movie> matches = new ArrayList<>();
+
         for(Movie movie:movies){
-            if(searchText.equals(movie.getTitle()))
+            if(movie.getTitle().toLowerCase().contains(searchText.toLowerCase()))
             {
-                return movies;
+                matches.add(movie);
             }
         }
-        return null;
+        return matches;
     }
 
 }
