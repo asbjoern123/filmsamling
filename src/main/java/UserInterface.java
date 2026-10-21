@@ -21,29 +21,26 @@ public void startProgram(){
 
 }
 public void createMovie(){
-    System.out.print("skrive en title:");
+    System.out.print("Skriv en title:");
     String title = scanner.nextLine();
-    System.out.println("skrive en director");
+    System.out.println("Skriv en instruktør");
     String director = scanner.nextLine();
-    System.out.println("skrive udgivelses år");
+    System.out.println("Skriv udgivelses år");
     int yearCreated = scanner.nextInt();
     scanner.nextLine();
-    System.out.println("er filem i farve skriv endten true eller false");
+    System.out.println("Er filmen i farve skriv enten true eller false");
     boolean inColor = scanner.nextBoolean();
     scanner.nextLine();
-    System.out.println("hvor lang er filmen i minutter");
+    System.out.println("Hvor lang er filmen i minutter");
     int lengthInMinutes = scanner.nextInt();
     scanner.nextLine();
-    System.out.println("skrive en genren");
+    System.out.println("Skriv en genre");
     String genre = scanner.nextLine();
     controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
 }
 public void deleteMovie(){
-    System.out.println("hvilken film ville du slette");
+    System.out.println("Hvilken film vil du slette?");
     String title = scanner.nextLine();
-    if()
-    for(Movie movie: controller.getMovies())
-    controller.deleteMovie(movie);
 
 }
 
@@ -58,13 +55,13 @@ System.out.print("Søg efter titel: ");
             return;
         }
 
-        for (Movie movie ; matches) {
+        for (Movie movie : matches) {
             String color;
 
             if (movie.isInColor()) {
-                color = "farver";
+                color = "Farver";
             } else {
-                color = "sort-hvid";
+                color = "Sort-hvid";
             }
 
             System.out.println("Titel: " + movie.getTitle());
@@ -72,7 +69,7 @@ System.out.print("Søg efter titel: ");
             System.out.println("Årstal: " + movie.getYearCreated());
             System.out.println("Farver: " + color);
             System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
-            System.out.println("Genre: "movie.getGenre());
+            System.out.println("Genre: " + movie.getGenre());
             System.out.println();
         }
 

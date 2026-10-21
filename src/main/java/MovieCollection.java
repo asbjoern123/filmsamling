@@ -17,14 +17,8 @@ public class MovieCollection {
 
         return movies.size();
     }
-    public boolean deleteMovie(String title) {
-        for (Movie movie : movies) {
-            if (title.equals(movie.getTitle())) {
-                movies.remove(movie.getTitle());
-                return true;
-            }
-        }
-        return false;
+    public boolean deleteMovie(Movie movie) {
+        return movies.remove(movie);
     }
     public boolean editMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre)
     {
