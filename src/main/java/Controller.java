@@ -17,7 +17,7 @@ public class Controller {
     }
 
     public boolean editMovie(Movie movie, String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre) {
-        return movieCollection.editMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
+        return movieCollection.editMovie(movie, title, director, yearCreated, inColor, lengthInMinutes, genre);
     }
 
     public boolean deleteMovie(Movie movie) {
