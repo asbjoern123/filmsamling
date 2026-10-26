@@ -50,8 +50,22 @@ public class UserInterface {
     }
 
     public void deleteMovie() {
-        System.out.println("Hvilken film vil du slette?");
-        String title = scanner.nextLine();
+
+        System.out.println("søg efter en film du ville slette?");
+        String searchText = scanner.nextLine();
+
+        ArrayList<Movie> matches = controller.searchMovies(searchText);
+
+        for (int i = 0; i < matches.size(); i++) {
+            System.out.println((i + 1) + ". " + matches.get(i).getTitle());
+        }
+
+        System.out.println("vælg et nummer");
+        int valgt = scanner.nextInt();
+
+        Movie valgtmovie = matches.get(valgt - 1);
+        System.out.println(" du har fjernet " + valgt);
+        controller.deleteMovie(valgtmovie);
 
     }
 
