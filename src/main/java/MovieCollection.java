@@ -13,7 +13,6 @@ public class MovieCollection {
 
     public void addMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre) {
         movies.add(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre));
-
     }
 
     public int getNumberOfMovies() {
