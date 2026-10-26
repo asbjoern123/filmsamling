@@ -89,10 +89,9 @@ public void showAllMovies(){
         }
     else {
         for (Movie movie : movies) {
-            System.out.println("Titel: " + movie.getTitle());
+            System.out.println(movie.getTitle() + " (" + movie.getYearCreated() + ")");
             System.out.println("Instruktør: " + movie.getDirector());
             System.out.println("Genre: " + movie.getGenre());
-            System.out.println("Årstal: " + movie.getYearCreated());
             System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
         }
     }
