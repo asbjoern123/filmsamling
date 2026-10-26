@@ -2,7 +2,7 @@
 
 | | Krav | Opfyldt? | Hvor |
 |---|---|---|---|
-| F | Brugeren kan med en menu vælge div. CRUD operationer | Ja | US2, `UserInterface.startProgram`|
+| F | Menu til navigation | Ja | US2, `UserInterface.startProgram`|
 | F | Opret en film | Ja  | US1, `MovieCollection.addMovie`|
 | F | Vise en liste af alle film | Ja | US3, `UserInterface.showAllMovies` |
 | F | Søg efter film | Ja | US4, `UserInterface.searchMovies` |
