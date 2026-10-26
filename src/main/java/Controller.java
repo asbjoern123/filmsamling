@@ -21,7 +21,12 @@ public class Controller {
     }
 
     public boolean deleteMovie(Movie movie) {
+        if(movieCollection.getMovies().contains(movie)){
             return movieCollection.deleteMovie(movie);
+        }
+        else {
+            return false;
+        }
     }
 }
 

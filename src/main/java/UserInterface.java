@@ -56,6 +56,11 @@ public class UserInterface {
 
         ArrayList<Movie> matches = controller.searchMovies(searchText);
 
+        if (matches.isEmpty()) {
+            System.out.println("Ingen film fundet.");
+            return;
+        }
+
         for (int i = 0; i < matches.size(); i++) {
             System.out.println((i + 1) + ". " + matches.get(i).getTitle());
         }
