@@ -89,7 +89,11 @@ public void showAllMovies(){
         }
     else {
         for (Movie movie : movies) {
-            System.out.println(movie.getTitle() + " af " + movie.getDirector() + ", genren: " + movie.getGenre() + " fra " + movie.getYearCreated() + " på " + movie.getLengthInMinutes() + " Minutter.");
+            System.out.println("Titel: " + movie.getTitle());
+            System.out.println("Instruktør: " + movie.getDirector());
+            System.out.println("Genre: " + movie.getGenre());
+            System.out.println("Årstal: " + movie.getYearCreated());
+            System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
         }
     }
 }
