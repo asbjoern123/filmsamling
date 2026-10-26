@@ -111,12 +111,7 @@ public class UserInterface {
             System.out.println("Filmlisten er tom");
         } else {
             for (Movie movie : movies) {
-                String color;
-                if (movie.isInColor()) {
-                    color = "farver";
-                } else {
-                    color = "sort-hvid";
-                }
+                String color = movie.isInColor() ? "farver" : "sort-hvid";
                 System.out.println(movie.getTitle() + " (" + movie.getYearCreated() + ") i " + color);
                 System.out.println("Instruktør: " + movie.getDirector());
                 System.out.println("Genre: " + movie.getGenre());
@@ -126,6 +121,89 @@ public class UserInterface {
     }
 
     public void editMovie() {
+        System.out.print("Søg efter titel: ");
+        String searchText = scanner.nextLine();
+
+        ArrayList<Movie> matches = controller.searchMovies(searchText);
+
+        if (matches.isEmpty()) {
+            System.out.println("Ingen film matcher din søgning.");
+            return;
+        }
+
+        for (int i = 1; i <= matches.size(); i++) {
+            System.out.println(i + ". " + matches.get(i - 1).getTitle());
+        }
+
+        System.out.print("Vælg nummer: ");
+
+        int chosenMovieNum = scanner.nextInt();
+        scanner.nextLine();
+
+        Movie chosenMovie = null;
+
+        while(chosenMovieNum < 1 || chosenMovieNum > matches.size())
+        {
+            System.out.println("Det valgte nummer fandtes ikke. Prøv igen");
+            chosenMovieNum = scanner.nextInt();
+            scanner.nextLine();
+
+        }
+
+        chosenMovie = matches.get(chosenMovieNum-1);
+
+        System.out.println("Tryk Enter for at beholde den nuværende værdi.");
+
+        System.out.print("Titel " + "[" + chosenMovie.getTitle() + "]: ");
+        String newTitle = scanner.nextLine();
+        if (newTitle.isBlank()) {
+            newTitle = chosenMovie.getTitle();
+        }
+
+        System.out.print("Instruktør " + "[" + chosenMovie.getDirector() + "]: ");
+        String newDirector = scanner.nextLine();
+        if (newDirector.isBlank()) {
+            newDirector = chosenMovie.getDirector();
+        }
+
+        System.out.print("Årstal " + "[" + chosenMovie.getYearCreated() + "]: ");
+        String newYearString = scanner.nextLine();
+        int newYear = chosenMovie.getYearCreated();
+        if (!newYearString.isBlank()) {
+            newYear = Integer.parseInt(newYearString);
+        }
+
+        System.out.print("I farver " + "(" + (chosenMovie.isInColor() ? "Ja" : "Nej") + "): ");
+        String inColorString = scanner.nextLine();
+        boolean inColor = chosenMovie.isInColor();
+
+        if (!inColorString.isBlank()) {
+            inColor = inColorString.equalsIgnoreCase("ja");
+        }
+
+        System.out.print("Længde i minutter " + "[" + chosenMovie.getLengthInMinutes() + "]: ");
+        String newLengthString = scanner.nextLine();
+        int newLength = chosenMovie.getLengthInMinutes();
+        if (!newLengthString.isBlank()) {
+            newLength = Integer.parseInt(newLengthString);
+        }
+
+        System.out.print("Genre " + "[" + chosenMovie.getGenre() + "]: ");
+        String newGenre = scanner.nextLine();
+        if (newGenre.isBlank()) {
+            newGenre = chosenMovie.getGenre();
+        }
+
+        controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre);
+
+        System.out.println("Filmen er opdateret:");
+
+        System.out.println(chosenMovie.getTitle() + " (" + chosenMovie.getYearCreated() + ")");
+        System.out.println("  Instruktør: " + chosenMovie.getDirector());
+        System.out.println("  Genre: " + chosenMovie.getGenre());
+        String color = chosenMovie.isInColor() ? "farver" : "sort-hvid";
+
+        System.out.println("  Længde: " + chosenMovie.getLengthInMinutes() + " minutter, " + color);
 
     }
 
@@ -136,6 +214,11 @@ public class UserInterface {
         System.out.println("press 4 to editMovie");
         System.out.println("press 5 to deleteMovie");
         System.out.println("press 0 to stop the program");
+    }
+
+    private int readInt(String prompt) {
+        System.out.print(prompt);
+        return Integer.parseInt(scanner.nextLine().trim());
     }
 }
 
