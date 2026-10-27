@@ -69,10 +69,15 @@ public class UserInterface {
             System.out.println((i + 1) + ". " + matches.get(i).getTitle());
         }
 
-        int valgt = readInt("vælg et nummer");
+        int valgt = readInt("Vælg nummer (0 for at afbryde): ");
 
-        while (valgt < 1 || valgt > matches.size()) {
-            valgt = readInt("vælg et nummer");
+        while (valgt < 0 || valgt > matches.size()) {
+            valgt = readInt("Ugyldigt nummer. Prøv igen (0 for at afbryde): ");
+        }
+
+        if (valgt == 0) {
+            System.out.println("Sletning afbrudt.");
+            return;
         }
 
         Movie valgtmovie = matches.get(valgt - 1);
@@ -142,11 +147,15 @@ public class UserInterface {
             System.out.println(i + ". " + matches.get(i - 1).getTitle());
         }
 
-        int chosenMovieNum = readInt("Vælg nummer: ");
+        int chosenMovieNum = readInt("Vælg nummer (0 for at afbryde): ");
 
+        while (chosenMovieNum < 0 || chosenMovieNum > matches.size()) {
+            chosenMovieNum = readInt("Ugyldigt nummer. Prøv igen (0 for at afbryde): ");
+        }
 
-        while (chosenMovieNum < 1 || chosenMovieNum > matches.size()) {
-            chosenMovieNum = readInt("Det valgte nummer fandtes ikke. Prøv igen: ");
+        if (chosenMovieNum == 0) {
+            System.out.println("Redigering afbrudt.");
+            return;
         }
 
         Movie chosenMovie;
