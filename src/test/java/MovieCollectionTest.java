@@ -115,9 +115,6 @@ class MovieCollectionTest {
     }
     @Test
     void deleteMovieThatDosentExist(){
-        MovieCollection movies = new MovieCollection();
-        movies.addMovie("okidoki","ask",1990,true,90,"gyser");
-
         Movie blablabla = new Movie("blablabla","ask",1990,true,90,"gyser");
 
         boolean deletemovie = collection.deleteMovie(blablabla);
