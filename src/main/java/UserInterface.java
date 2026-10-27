@@ -9,7 +9,7 @@ public class UserInterface {
     public void startProgram() {
         System.out.println("Velkommen til min filmsamling");
         while (running) {
-            printinfo();
+            printMenu();
             String choice = scanner.nextLine().trim();
             switch (choice) {
                 case "1" -> createMovie();
@@ -147,7 +147,6 @@ public class UserInterface {
             System.out.println("Det valgte nummer fandtes ikke. Prøv igen");
             chosenMovieNum = scanner.nextInt();
             scanner.nextLine();
-
         }
 
         chosenMovie = matches.get(chosenMovieNum-1);
@@ -207,13 +206,13 @@ public class UserInterface {
 
     }
 
-    public void printinfo() {
-        System.out.println("press 1 to createMovie");
-        System.out.println("press 2 to showAllMovies");
-        System.out.println("press 3 to searchMovies");
-        System.out.println("press 4 to editMovie");
-        System.out.println("press 5 to deleteMovie");
-        System.out.println("press 0 to stop the program");
+    public void printMenu() {
+        System.out.println("Tast 1 for at oprette en film");
+        System.out.println("Tast 2 for at vise alle film");
+        System.out.println("Tast 3 for at søge efter en film");
+        System.out.println("Tast 4 for at redigere en film");
+        System.out.println("Tast 5 for at slette en film");
+        System.out.println("Tast 0 for at stoppe programmet");
     }
 
     private int readInt(String prompt) {
