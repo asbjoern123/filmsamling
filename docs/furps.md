@@ -9,6 +9,6 @@
 | F | Rediger en film | Ja | US5, `UserInterface.editMovie` |
 | F | Slet en film | Ja | US6, `UserInterface.deleteMovie` |
 | U |  |  | , `` |
-| R |  |  | , `` |
+| R | Progammet crasher ikke hvis der indtastes forkert input | Nej | Del 6, `try` `catch` |
 | P |  |  | , `` |
 | S |  |  | , `` |
