@@ -136,7 +136,7 @@ public class UserInterface {
         int chosenMovieNum = scanner.nextInt();
         scanner.nextLine();
 
-        Movie chosenMovie = null;
+        Movie chosenMovie;
 
         while(chosenMovieNum < 1 || chosenMovieNum > matches.size())
         {
