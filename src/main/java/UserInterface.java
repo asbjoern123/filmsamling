@@ -1,5 +1,7 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class UserInterface {
     Scanner scanner = new Scanner(System.in);
@@ -30,8 +32,16 @@ public class UserInterface {
 
         System.out.print("Skriv en instruktør: ");
         String director = scanner.nextLine();
+        int yearCreated = 0;
 
-        int yearCreated = readInt("Skriv udgivelses år: ");
+        while(true){
+        yearCreated = readInt("Skriv udgivelses år: ");
+
+        if (yearCreated > 1888 && yearCreated <= getYear()) {
+            break;
+        }
+        else System.out.println("Udgivelsesåret skal være mellem 1888-" + getYear());
+        }
 
         System.out.print("Er filmen i farve (ja/nej): ");
         String svar = scanner.nextLine();
@@ -168,7 +178,12 @@ public class UserInterface {
             if (!newYearString.isBlank()) {
                 try {
                     newYear = Integer.parseInt(newYearString);
-                    break;
+                    if (newYear > 1888 && newYear <= getYear()) {
+                        break;
+                    } else {
+                        System.out.println("Udgivelsesåret skal være mellem 1888-" + getYear());
+                        System.out.print("Prøv igen: ");
+                    }
                 } catch (NumberFormatException e) {
                     numberFormatExceptionMessage();
                 }
@@ -239,6 +254,11 @@ public class UserInterface {
 
     private static void numberFormatExceptionMessage() {
         System.out.println("Dit input skal være et tal. Prøv igen.");
+    }
+
+    private static int getYear() {
+        LocalDate localDate = LocalDate.now();
+        return localDate.getYear();
     }
 
 }
