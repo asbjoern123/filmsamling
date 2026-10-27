@@ -81,8 +81,20 @@ public class UserInterface {
         }
 
         Movie valgtmovie = matches.get(valgt - 1);
-        System.out.println(" du har fjernet " + valgt);
-        controller.deleteMovie(valgtmovie);
+
+        boolean confirm = readYesNo("Er du sikker på, at du vil slette filmen? (ja/nej)");
+
+        if (confirm) {
+            boolean deleted = controller.deleteMovie(valgtmovie);
+
+            if (deleted) {
+                System.out.println(valgtmovie.getTitle() + " er slettet.");
+            } else {
+                System.out.println("Filmen kunne ikke findes.");
+            }
+        } else {
+            System.out.println("Sletning afbrudt.");
+        }
 
     }
 
