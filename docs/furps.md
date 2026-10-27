@@ -10,6 +10,6 @@
 | F | Slet en film | Ja | US6, `UserInterface.deleteMovie` |
 | U |  |  | , `` |
 | R | Progammet crasher ikke hvis der indtastes forkert input | Nej | Del 6, `try` `catch` |
-| P |  |  | , `` |
+| P | Søgeresultatet vises på under ét sekund | Ja | US4, `UserInterface.searchMovies` |
 | S | Der er skrevet JUnit tests på MovieCollection | Ja | Del 5 , `MovieCollectionTest.java` |
 | S | Der er skrevet JUnit tests på Movie | Ja | Del 5 , `MovieTest.java` |
