@@ -25,25 +25,21 @@ public class UserInterface {
     }
 
     public void createMovie() {
-        System.out.print("Skriv en titel.");
+        System.out.print("Skriv en titel: ");
         String title = scanner.nextLine();
 
-        System.out.println("Skriv en instruktør.");
+        System.out.print("Skriv en instruktør: ");
         String director = scanner.nextLine();
 
-        System.out.println("Skriv udgivelses år.");
-        int yearCreated = scanner.nextInt();
-        scanner.nextLine();
+        int yearCreated = readInt("Skriv udgivelses år: ");
 
-        System.out.println("Er filmen i farve (ja/nej).");
+        System.out.print("Er filmen i farve (ja/nej): ");
         String svar = scanner.nextLine();
         boolean inColor = svar.equalsIgnoreCase("ja");
 
-        System.out.println("Hvor lang er filmen i minutter?");
-        int lengthInMinutes = scanner.nextInt();
-        scanner.nextLine();
+        int lengthInMinutes = readInt("Hvor lang er filmen i minutter?: ");
 
-        System.out.println("Skriv en genre.");
+        System.out.print("Skriv en genre: ");
         String genre = scanner.nextLine();
         controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
         System.out.println(title + " er tilføjet til samlingen.");
