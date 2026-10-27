@@ -43,9 +43,7 @@ public class UserInterface {
         else System.out.println("Udgivelsesåret skal være mellem 1888-" + getYear());
         }
 
-        System.out.print("Er filmen i farve (ja/nej): ");
-        String svar = scanner.nextLine();
-        boolean inColor = svar.equalsIgnoreCase("ja");
+        boolean inColor = readYesNo("Er filmen i farve? (ja/nej)");
 
         int lengthInMinutes = readInt("Hvor lang er filmen i minutter?: ");
 
@@ -190,12 +188,29 @@ public class UserInterface {
             } else break;
         }
 
-        System.out.print("I farver " + "(" + (chosenMovie.isInColor() ? "Ja" : "Nej") + "): ");
-        String inColorString = scanner.nextLine();
         boolean inColor = chosenMovie.isInColor();
 
-        if (!inColorString.isBlank()) {
-            inColor = inColorString.equalsIgnoreCase("ja");
+        while (true) {
+            System.out.println("Er filmen i farve? (ja/nej). Enter beholder den gamle værdi.");
+            String answer = scanner.nextLine().trim();
+
+            if (answer.isEmpty()) {
+                break;
+            }
+
+            if (answer.equalsIgnoreCase("ja")
+                    || answer.equalsIgnoreCase("j")) {
+                inColor = true;
+                break;
+            }
+
+            if (answer.equalsIgnoreCase("nej")
+                    || answer.equalsIgnoreCase("n")) {
+                inColor = false;
+                break;
+            }
+
+            System.out.println("Svar ja eller nej.");
         }
 
         int newLength = chosenMovie.getLengthInMinutes();
@@ -260,7 +275,24 @@ public class UserInterface {
         LocalDate localDate = LocalDate.now();
         return localDate.getYear();
     }
+    private boolean readYesNo(String prompt) {
+        while (true) {
+            System.out.println(prompt);
+            String answer = scanner.nextLine().trim();
 
+            if (answer.equalsIgnoreCase("ja")
+                    || answer.equalsIgnoreCase("j")) {
+                return true;
+            }
+
+            if (answer.equalsIgnoreCase("nej")
+                    || answer.equalsIgnoreCase("n")) {
+                return false;
+            }
+
+            System.out.println("Svar ja eller nej.");
+        }
+    }
 }
 
 
