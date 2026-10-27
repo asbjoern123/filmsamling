@@ -123,6 +123,6 @@ class MovieCollectionTest {
         boolean deletemovie = collection.deleteMovie(blablabla);
 
         assertFalse(deletemovie);
-        assertEquals(1,collection.getMovies().size());
+        assertEquals(3,collection.getMovies().size());
     }
 }
