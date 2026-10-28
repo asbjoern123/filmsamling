@@ -49,12 +49,18 @@ public class Movie {
     }
 
     public void setTitle(String title) {
-
+        if(title.isEmpty() || title.trim().isEmpty())
+            throw new IllegalArgumentException(
+                    "En film skal have en titel"
+            );
         this.title = title;
     }
 
     public void setDirector(String director) {
-
+        if(director.isEmpty() || director.trim().isEmpty() || director == null )
+            throw new IllegalArgumentException(
+                    "En film skal have en director"
+            );
         this.director = director;
     }
 
@@ -72,10 +78,18 @@ public class Movie {
     }
 
     public void setLengthInMinutes(int lengthInMinutes) {
+        if (lengthInMinutes <= 0){
+            throw new IllegalArgumentException(
+                    "en film kan ikke vare mindre eller lig med 0 minuter");
+        }
         this.lengthInMinutes = lengthInMinutes;
     }
 
     public void setGenre(String genre) {
+        if(genre.isEmpty() || genre.trim().isEmpty() || genre == null )
+            throw new IllegalArgumentException(
+                    "En film skal have en genre"
+            );
         this.genre = genre;
     }
 

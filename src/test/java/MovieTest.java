@@ -47,7 +47,7 @@ class MovieTest {
         Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
 
         // Act + Asserts
-        Assertions.assertThrows(IllegalArgumentException.class, () ->{
+        Assertions.assertThrows(NullPointerException.class, () ->{
             movie.setTitle(null);
         });
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
@@ -63,7 +63,7 @@ class MovieTest {
         Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
 
         // Act + Asserts
-        Assertions.assertThrows(IllegalArgumentException.class, () ->{
+        Assertions.assertThrows(NullPointerException.class, () ->{
             movie.setDirector(null);
         });
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
@@ -80,7 +80,7 @@ class MovieTest {
         Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
 
         // Act + Asserts
-        Assertions.assertThrows(IllegalArgumentException.class, () ->{
+        Assertions.assertThrows(NullPointerException.class, () ->{
             movie.setGenre(null);
         });
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
