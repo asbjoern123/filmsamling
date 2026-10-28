@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MovieTest {
@@ -31,7 +33,7 @@ class MovieTest {
     @Test
     void setInvalidYearCreated(){
         // Arrange
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action");
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
 
         // Act + Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
@@ -42,7 +44,7 @@ class MovieTest {
     @Test
     void setInvalidTitle(){
         // Arrange
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action");
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
 
         // Act + Asserts
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
@@ -58,7 +60,7 @@ class MovieTest {
     @Test
     void setInvalidDirector(){
         // Arrange
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action");
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
 
         // Act + Asserts
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
@@ -75,7 +77,7 @@ class MovieTest {
     @Test
     void setInvalidGenre(){
         // Arrange
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action");
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
 
         // Act + Asserts
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
@@ -92,7 +94,7 @@ class MovieTest {
     @Test
     void setInvalidLength(){
         // Arrange
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action");
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
 
         // Act + Asserts
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
@@ -100,6 +102,14 @@ class MovieTest {
         });
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
             movie.setLengthInMinutes(0);
+        });
+    }
+    @Test
+    void setInvalidWatchDate(){
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
+
+        Assertions.assertThrows(IllegalArgumentException.class, () ->{
+            movie.setDate(LocalDate.parse("01-01-3000"));
         });
     }
 

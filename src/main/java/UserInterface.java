@@ -51,7 +51,11 @@ public class UserInterface {
 
         System.out.print("Skriv en genre: ");
         String genre = scanner.nextLine();
-        controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre, null);
+        System.out.println("Hvornår så du sidst filmen (dd-MM-yyyy");
+        String dateText = scanner.nextLine();
+        LocalDate lastDate = LocalDate.parse(dateText, formatter);
+
+        controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre, lastDate);
         System.out.println(title + " er tilføjet til samlingen.");
     }
 
@@ -126,6 +130,7 @@ public class UserInterface {
             System.out.println("Farver: " + color);
             System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
             System.out.println("Genre: " + movie.getGenre());
+            System.out.println("Sidst set: " + movie.getLastWatchedDate().format(formatter));
             System.out.println();
         }
 
@@ -142,6 +147,7 @@ public class UserInterface {
                 System.out.println("Instruktør: " + movie.getDirector());
                 System.out.println("Genre: " + movie.getGenre());
                 System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
+                System.out.println("sidst set " + movie.getLastWatchedDate().format(formatter));
             }
         }
     }
@@ -239,11 +245,12 @@ public class UserInterface {
         if (newGenre.isBlank()) {
             newGenre = chosenMovie.getGenre();
         }
-        System.out.print("sidst set " + "[" + chosenMovie.getDate() + "]: ");
+        System.out.print("sidst set " + "[" + chosenMovie.getLastWatchedDate() + "]: ");
         String newdateText = scanner.next();
         LocalDate newdate;
+
         if (newdateText.isBlank()) {
-            newdate = chosenMovie.getDate();
+            newdate = chosenMovie.getLastWatchedDate();
         } else {
             newdate = LocalDate.parse(newdateText, formatter);
         }
@@ -259,6 +266,7 @@ public class UserInterface {
             System.out.println("  Instruktør: " + chosenMovie.getDirector());
             System.out.println("  Genre: " + chosenMovie.getGenre());
             String color = chosenMovie.isInColor() ? "farver" : "sort-hvid";
+            System.out.println("  sids set: " + chosenMovie.getLastWatchedDate().format(formatter));
 
             System.out.println("  Længde: " + chosenMovie.getLengthInMinutes() + " minutter, " + color);
         }

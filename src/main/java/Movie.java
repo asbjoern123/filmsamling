@@ -11,11 +11,10 @@ public class Movie {
     private int lengthInMinutes;
     private String genre;
     private static final int FIRST_MOVIE_YEAR = 1888;
-
     private LocalDate date = null;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate date){
+    public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate date) {
         this.title = title;
         this.director = director;
         setYearCreated(yearCreated);
@@ -25,63 +24,69 @@ public class Movie {
         this.date = date;
     }
 
-        public String getTitle(){
-            return title;
-        }
-        public String getDirector(){
-            return director;
-        }
-        public int getYearCreated(){
-            return yearCreated;
-        }
-        public boolean isInColor(){
-            return inColor;
-        }
-        public int getLengthInMinutes(){
-            return lengthInMinutes;
-        }                                     
-        public String getGenre(){
-            return genre;
-        }
+    public String getTitle() {
+        return title;
+    }
 
-        public void setTitle (String title){
+    public String getDirector() {
+        return director;
+    }
+
+    public int getYearCreated() {
+        return yearCreated;
+    }
+
+    public boolean isInColor() {
+        return inColor;
+    }
+
+    public int getLengthInMinutes() {
+        return lengthInMinutes;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setTitle(String title) {
 
         this.title = title;
-        }
-        public void setDirector (String director){
+    }
+
+    public void setDirector(String director) {
 
         this.director = director;
-        }
-        public void setYearCreated (int yearCreated) {
+    }
 
+    public void setYearCreated(int yearCreated) {
+        int latestYear = LocalDate.now().getYear() + 1;
+        if (yearCreated < FIRST_MOVIE_YEAR || yearCreated > latestYear) {
+            throw new IllegalArgumentException(
+                    "Årstallet skal være mellem " + FIRST_MOVIE_YEAR + " og " + latestYear + ".");
+        }
         this.yearCreated = yearCreated;
+    }
 
-        public void setYearCreated(int yearCreated) {
-            int latestYear = LocalDate.now().getYear() + 1;
-            if (yearCreated < FIRST_MOVIE_YEAR || yearCreated > latestYear) {
-                throw new IllegalArgumentException(
-                        "Årstallet skal være mellem " + FIRST_MOVIE_YEAR + " og " + latestYear + ".");
-            }
-            this.yearCreated = yearCreated;
-        }
+    public void setInColor(boolean inColor) {
+        this.inColor = inColor;
+    }
 
-            public void setInColor (boolean inColor){
-                this.inColor = inColor;
-            }
-            public void setLengthInMinutes(int lengthInMinutes) {
-                this.lengthInMinutes = lengthInMinutes;
-            }
-            public void setGenre(String genre) {
-                this.genre = genre;
-            }
-        }
-    public LocalDate getDate() {
-        return date;
+    public void setLengthInMinutes(int lengthInMinutes) {
+        this.lengthInMinutes = lengthInMinutes;
     }
-    public void setDate(LocalDate date) {
-        this.date = date;
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
-    public String getdatetimeformat(){
-        return date.format(formatter);
-    }
+
+
+public LocalDate getLastWatchedDate() {
+    return date;
+}
+
+public void setDate(LocalDate date) {
+    this.date = date;
+}
+
+
 }
