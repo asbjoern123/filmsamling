@@ -246,18 +246,18 @@ public class UserInterface {
             newGenre = chosenMovie.getGenre();
         }
         System.out.print("sidst set " + "[" + chosenMovie.getLastWatchedDate() + "]: ");
-        String newdateText = scanner.next();
-        LocalDate newdate;
+        String newDateText = scanner.next();
+        LocalDate newDate;
 
-        if (newdateText.isBlank()) {
-            newdate = chosenMovie.getLastWatchedDate();
+        if (newDateText.isBlank()) {
+            newDate = chosenMovie.getLastWatchedDate();
         } else {
-            newdate = LocalDate.parse(newdateText, formatter);
+            newDate = LocalDate.parse(newDateText, formatter);
         }
 
-        boolean edited = controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre, newdate);
+        boolean edited = controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre, newDate);
 
-        controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre, newdate);
+        controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre, newDate);
 
         if (edited) {
             System.out.println("Filmen er opdateret:");

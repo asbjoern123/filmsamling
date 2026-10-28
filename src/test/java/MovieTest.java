@@ -109,7 +109,7 @@ class MovieTest {
         Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
 
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
-            movie.setDate(LocalDate.parse("01-01-3000"));
+            movie.setLastWatchedDate(LocalDate.parse("01-01-3000"));
         });
     }
 

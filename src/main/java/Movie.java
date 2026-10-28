@@ -11,17 +11,17 @@ public class Movie {
     private int lengthInMinutes;
     private String genre;
     private static final int FIRST_MOVIE_YEAR = 1888;
-    private LocalDate date = null;
+    private LocalDate lastWatchedDate = null;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate date) {
+    public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate lastWatchedDate) {
         this.title = title;
         this.director = director;
         setYearCreated(yearCreated);
         this.inColor = inColor;
         this.lengthInMinutes = lengthInMinutes;
         this.genre = genre;
-        this.date = date;
+        this.lastWatchedDate = lastWatchedDate;
     }
 
     public String getTitle() {
