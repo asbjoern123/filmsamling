@@ -81,21 +81,16 @@ public class Movie {
 
 
 public LocalDate getLastWatchedDate() {
-
-    if (yearCreated <= FIRST_MOVIE_YEAR && yearCreated >= date.getYear()  ) {
-        throw new IllegalArgumentException(
-                "Årstallet skal være mellem " + FIRST_MOVIE_YEAR + " og " + date.format(formatter) + ".");
-    }
-    return date;
+    return lastWatchedDate;
 }
 
-public void setDate(LocalDate date) {
+public void setLastWatchedDate(LocalDate date) {
         LocalDate today = LocalDate.now();
-    if (yearCreated <= FIRST_MOVIE_YEAR && yearCreated >= today.format(formatter)  ) {
+    if (date.isAfter(today)){
         throw new IllegalArgumentException(
-                "Årstallet skal være mellem " + FIRST_MOVIE_YEAR + " og " + date.format(formatter) + ".");
+                "du kan ikke havet set filmen i fremtiden");
     }
-    this.date = date;
+    this.lastWatchedDate = date;
 }
 
 
