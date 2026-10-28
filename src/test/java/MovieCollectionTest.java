@@ -13,9 +13,9 @@ class MovieCollectionTest {
     void setUp(){
         // Kører før HVER test – så starter alle tests med den samme, friske samling
         collection = new MovieCollection();
-        collection.addMovie("The Godfather", "Francis Ford Coppola", 1972, true, 175, "Crime");
-        collection.addMovie("Casablanca", "Michael Curtiz", 1942, false, 102, "Drama");
-        collection.addMovie("Godzilla", "Ishirō Honda", 1954, false, 96, "Sci-fi");
+        collection.addMovie("The Godfather", "Francis Ford Coppola", 1972, true, 175, "Crime",null);
+        collection.addMovie("Casablanca", "Michael Curtiz", 1942, false, 102, "Drama",null);
+        collection.addMovie("Godzilla", "Ishirō Honda", 1954, false, 96, "Sci-fi",null);
     }
 
     @Test
@@ -35,7 +35,7 @@ class MovieCollectionTest {
         MovieCollection movieCollection = new MovieCollection();
 
         // Act
-        movieCollection.addMovie("Jaws","Steven Spielberg",1995,true ,124, "Thriller");
+        movieCollection.addMovie("Jaws","Steven Spielberg",1995,true ,124, "Thriller",null);
 
         // Assert
         assertEquals("Jaws", movieCollection.getMovies().get(0).getTitle());
@@ -47,8 +47,8 @@ class MovieCollectionTest {
         // Intet, "setup" har allerede lavet en samling med 3 film
 
         // Act
-        collection.addMovie("Jaws","Steven Spielberg",1995,true,124, "Thriller");
-        collection.addMovie("Jaws2","Steven Spielberg", 1995, true, 127, "Thriller");
+        collection.addMovie("Jaws","Steven Spielberg",1995,true,124, "Thriller",null);
+        collection.addMovie("Jaws2","Steven Spielberg", 1995, true, 127, "Thriller",null);
 
         // Assert
         assertEquals(5, collection.getNumberOfMovies());
@@ -59,7 +59,7 @@ class MovieCollectionTest {
         Movie movie = collection.getMovies().get(0);
 
         // Act
-        boolean result = collection.editMovie(movie, "Shrek", "James", 2002, true, 129, "Comedy");
+        boolean result = collection.editMovie(movie, "Shrek", "James", 2002, true, 129, "Comedy",null);
 
         // Assert
         assertEquals("Shrek", movie.getTitle());
@@ -68,10 +68,10 @@ class MovieCollectionTest {
     @Test
     void editMovieNotInCollection(){
         // Arrange
-        Movie movie = new Movie("Titanic", "James Cameron", 1997, true, 195, "Drama");
+        Movie movie = new Movie("Titanic", "James Cameron", 1997, true, 195, "Drama",null);
 
         // Act
-        boolean result = collection.editMovie(movie, "Shrek", "James", 2002, true, 129, "Comedy");
+        boolean result = collection.editMovie(movie, "Shrek", "James", 2002, true, 129, "Comedy",null);
 
         // Assert
         assertFalse(result);
@@ -115,7 +115,7 @@ class MovieCollectionTest {
     }
     @Test
     void deleteMovieThatDosentExist(){
-        Movie blablabla = new Movie("blablabla","ask",1990,true,90,"gyser");
+        Movie blablabla = new Movie("blablabla","ask",1990,true,90,"gyser",null);
 
         boolean deletemovie = collection.deleteMovie(blablabla);
 

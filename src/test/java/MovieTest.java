@@ -7,8 +7,7 @@ class MovieTest {
     @Test
     void constructorSetsAllFields() {
         Movie movie = new Movie(
-                "The Hunger Games", "Gary Ross", 2012, true, 142, "Action"
-        );
+                "The Hunger Games", "Gary Ross", 2012, true, 142, "Action",null);
 
         assertEquals("The Hunger Games", movie.getTitle());
         assertEquals("Gary Ross", movie.getDirector());
@@ -21,8 +20,7 @@ class MovieTest {
     @Test
     void setTitleChangesTitle() {
         Movie movie = new Movie(
-                "The Hunger Games", "Gary Ross", 2012, true, 142, "Action"
-        );
+                "The Hunger Games", "Gary Ross", 2012, true, 142, "Action",null);
 
         movie.setTitle("Hunger Games");
 

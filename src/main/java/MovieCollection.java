@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MovieCollection {
@@ -11,8 +12,8 @@ public class MovieCollection {
         return movies;
     }
 
-    public void addMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre) {
-        movies.add(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre));
+    public void addMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate date) {
+        movies.add(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre, date));
     }
 
     public int getNumberOfMovies() {
@@ -24,7 +25,7 @@ public class MovieCollection {
         return movies.remove(movie);
     }
 
-    public boolean editMovie(Movie movie, String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre) {
+    public boolean editMovie(Movie movie, String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre,LocalDate date) {
         if (!movies.contains(movie)) {
             return false;
         }
@@ -34,6 +35,7 @@ public class MovieCollection {
         movie.setInColor(inColor);
         movie.setLengthInMinutes(lengthInMinutes);
         movie.setYearCreated(yearCreated);
+        movie.setDate(date);
         return true;
     }
 

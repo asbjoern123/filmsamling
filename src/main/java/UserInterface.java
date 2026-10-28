@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,6 +7,8 @@ public class UserInterface {
     Scanner scanner = new Scanner(System.in);
     Controller controller = new Controller();
     public boolean running = true;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy");
+
 
     public void startProgram() {
         System.out.println("Velkommen til min filmsamling");
@@ -45,7 +49,7 @@ public class UserInterface {
 
         System.out.println("Skriv en genre.");
         String genre = scanner.nextLine();
-        controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
+        controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre, null);
         System.out.println(title + " er tilføjet til samlingen.");
     }
 
@@ -192,8 +196,17 @@ public class UserInterface {
         if (newGenre.isBlank()) {
             newGenre = chosenMovie.getGenre();
         }
+        System.out.print("sidst set " + "[" + chosenMovie.getDate() + "]: ");
+        String newdateText = scanner.next();
+        LocalDate newdate;
+        if (newdateText.isBlank()) {
+            newdate = chosenMovie.getDate();
+        } else {
+            newdate = LocalDate.parse(newdateText, formatter);
+        }
 
-        controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre);
+
+        controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre, newdate);
 
         System.out.println("Filmen er opdateret:");
 
