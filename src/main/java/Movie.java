@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Movie {
@@ -8,13 +10,15 @@ public class Movie {
     private boolean inColor;
     private int lengthInMinutes;
     private String genre;
+    private static final int FIRST_MOVIE_YEAR = 1888;
+
     private LocalDate date = null;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate date){
         this.title = title;
         this.director = director;
-        this.yearCreated = yearCreated;
+        setYearCreated(yearCreated);
         this.inColor = inColor;
         this.lengthInMinutes = lengthInMinutes;
         this.genre = genre;
@@ -51,19 +55,26 @@ public class Movie {
         public void setYearCreated (int yearCreated) {
 
         this.yearCreated = yearCreated;
-        }
-        public void setInColor (boolean inColor){
 
-        this.inColor = inColor;
+        public void setYearCreated(int yearCreated) {
+            int latestYear = LocalDate.now().getYear() + 1;
+            if (yearCreated < FIRST_MOVIE_YEAR || yearCreated > latestYear) {
+                throw new IllegalArgumentException(
+                        "Årstallet skal være mellem " + FIRST_MOVIE_YEAR + " og " + latestYear + ".");
+            }
+            this.yearCreated = yearCreated;
         }
-        public void setLengthInMinutes(int lengthInMinutes) {
 
-        this.lengthInMinutes = lengthInMinutes;
+            public void setInColor (boolean inColor){
+                this.inColor = inColor;
+            }
+            public void setLengthInMinutes(int lengthInMinutes) {
+                this.lengthInMinutes = lengthInMinutes;
+            }
+            public void setGenre(String genre) {
+                this.genre = genre;
+            }
         }
-        public void setGenre(String genre) {
-
-        this.genre = genre;
-    }
     public LocalDate getDate() {
         return date;
     }

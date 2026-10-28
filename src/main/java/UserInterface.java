@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class UserInterface {
     Scanner scanner = new Scanner(System.in);
     Controller controller = new Controller();
@@ -29,25 +30,26 @@ public class UserInterface {
     }
 
     public void createMovie() {
-        System.out.print("Skriv en titel.");
+        System.out.print("Skriv en titel: ");
         String title = scanner.nextLine();
 
-        System.out.println("Skriv en instruktør.");
+        System.out.print("Skriv en instruktør: ");
         String director = scanner.nextLine();
+        int yearCreated = 0;
 
-        System.out.println("Skriv udgivelses år.");
-        int yearCreated = scanner.nextInt();
-        scanner.nextLine();
+        while (true) {
+            yearCreated = readInt("Skriv udgivelses år: ");
 
-        System.out.println("Er filmen i farve (ja/nej).");
-        String svar = scanner.nextLine();
-        boolean inColor = svar.equalsIgnoreCase("ja");
+            if (yearCreated >= 1888 && yearCreated <= getNextYear()) {
+                break;
+            } else System.out.println("Udgivelsesåret skal være mellem 1888-" + getNextYear());
+        }
 
-        System.out.println("Hvor lang er filmen i minutter?");
-        int lengthInMinutes = scanner.nextInt();
-        scanner.nextLine();
+        boolean inColor = readYesNo("Er filmen i farve? (ja/nej)");
 
-        System.out.println("Skriv en genre.");
+        int lengthInMinutes = readInt("Hvor lang er filmen i minutter?: ");
+
+        System.out.print("Skriv en genre: ");
         String genre = scanner.nextLine();
         controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre, null);
         System.out.println(title + " er tilføjet til samlingen.");
@@ -69,12 +71,32 @@ public class UserInterface {
             System.out.println((i + 1) + ". " + matches.get(i).getTitle());
         }
 
-        System.out.println("vælg et nummer");
-        int valgt = scanner.nextInt();
+        int valgt = readInt("Vælg nummer (0 for at afbryde): ");
+
+        while (valgt < 0 || valgt > matches.size()) {
+            valgt = readInt("Ugyldigt nummer. Prøv igen (0 for at afbryde): ");
+        }
+
+        if (valgt == 0) {
+            System.out.println("Sletning afbrudt.");
+            return;
+        }
 
         Movie valgtmovie = matches.get(valgt - 1);
-        System.out.println(" du har fjernet " + valgt);
-        controller.deleteMovie(valgtmovie);
+
+        boolean confirm = readYesNo("Er du sikker på, at du vil slette filmen? (ja/nej)");
+
+        if (confirm) {
+            boolean deleted = controller.deleteMovie(valgtmovie);
+
+            if (deleted) {
+                System.out.println(valgtmovie.getTitle() + " er slettet.");
+            } else {
+                System.out.println("Filmen kunne ikke findes.");
+            }
+        } else {
+            System.out.println("Sletning afbrudt.");
+        }
 
     }
 
@@ -139,21 +161,20 @@ public class UserInterface {
             System.out.println(i + ". " + matches.get(i - 1).getTitle());
         }
 
-        System.out.print("Vælg nummer: ");
+        int chosenMovieNum = readInt("Vælg nummer (0 for at afbryde): ");
 
-        int chosenMovieNum = scanner.nextInt();
-        scanner.nextLine();
-
-        Movie chosenMovie = null;
-
-        while(chosenMovieNum < 1 || chosenMovieNum > matches.size())
-        {
-            System.out.println("Det valgte nummer fandtes ikke. Prøv igen");
-            chosenMovieNum = scanner.nextInt();
-            scanner.nextLine();
+        while (chosenMovieNum < 0 || chosenMovieNum > matches.size()) {
+            chosenMovieNum = readInt("Ugyldigt nummer. Prøv igen (0 for at afbryde): ");
         }
 
-        chosenMovie = matches.get(chosenMovieNum-1);
+        if (chosenMovieNum == 0) {
+            System.out.println("Redigering afbrudt.");
+            return;
+        }
+
+        Movie chosenMovie;
+
+        chosenMovie = matches.get(chosenMovieNum - 1);
 
         System.out.println("Tryk Enter for at beholde den nuværende værdi.");
 
@@ -169,27 +190,49 @@ public class UserInterface {
             newDirector = chosenMovie.getDirector();
         }
 
-        System.out.print("Årstal " + "[" + chosenMovie.getYearCreated() + "]: ");
-        String newYearString = scanner.nextLine();
-        int newYear = chosenMovie.getYearCreated();
-        if (!newYearString.isBlank()) {
-            newYear = Integer.parseInt(newYearString);
+        int newYear = readInt(
+                "Årstal [" + chosenMovie.getYearCreated() + "]: ",
+                chosenMovie.getYearCreated()
+        );
+
+        while (newYear < 1888 || newYear > getNextYear()) {
+            System.out.println("Årstallet skal være mellem 1888 og " + (getNextYear()));
+
+            newYear = readInt(
+                    "Prøv igen. Enter beholder det gamle årstal: ",
+                    chosenMovie.getYearCreated()
+            );
         }
 
-        System.out.print("I farver " + "(" + (chosenMovie.isInColor() ? "Ja" : "Nej") + "): ");
-        String inColorString = scanner.nextLine();
         boolean inColor = chosenMovie.isInColor();
 
-        if (!inColorString.isBlank()) {
-            inColor = inColorString.equalsIgnoreCase("ja");
+        while (true) {
+            System.out.println("Er filmen i farve? (ja/nej). Enter beholder den gamle værdi.");
+            String answer = scanner.nextLine().trim();
+
+            if (answer.isEmpty()) {
+                break;
+            }
+
+            if (answer.equalsIgnoreCase("ja")
+                    || answer.equalsIgnoreCase("j")) {
+                inColor = true;
+                break;
+            }
+
+            if (answer.equalsIgnoreCase("nej")
+                    || answer.equalsIgnoreCase("n")) {
+                inColor = false;
+                break;
+            }
+
+            System.out.println("Svar ja eller nej.");
         }
 
-        System.out.print("Længde i minutter " + "[" + chosenMovie.getLengthInMinutes() + "]: ");
-        String newLengthString = scanner.nextLine();
-        int newLength = chosenMovie.getLengthInMinutes();
-        if (!newLengthString.isBlank()) {
-            newLength = Integer.parseInt(newLengthString);
-        }
+        int newLength = readInt(
+                "Længde i minutter [" + chosenMovie.getLengthInMinutes() + "]: ",
+                chosenMovie.getLengthInMinutes()
+        );
 
         System.out.print("Genre " + "[" + chosenMovie.getGenre() + "]: ");
         String newGenre = scanner.nextLine();
@@ -205,17 +248,20 @@ public class UserInterface {
             newdate = LocalDate.parse(newdateText, formatter);
         }
 
+        boolean edited = controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre);
 
         controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre, newdate);
 
-        System.out.println("Filmen er opdateret:");
+        if (edited) {
+            System.out.println("Filmen er opdateret:");
 
-        System.out.println(chosenMovie.getTitle() + " (" + chosenMovie.getYearCreated() + ")");
-        System.out.println("  Instruktør: " + chosenMovie.getDirector());
-        System.out.println("  Genre: " + chosenMovie.getGenre());
-        String color = chosenMovie.isInColor() ? "farver" : "sort-hvid";
+            System.out.println(chosenMovie.getTitle() + " (" + chosenMovie.getYearCreated() + ")");
+            System.out.println("  Instruktør: " + chosenMovie.getDirector());
+            System.out.println("  Genre: " + chosenMovie.getGenre());
+            String color = chosenMovie.isInColor() ? "farver" : "sort-hvid";
 
-        System.out.println("  Længde: " + chosenMovie.getLengthInMinutes() + " minutter, " + color);
+            System.out.println("  Længde: " + chosenMovie.getLengthInMinutes() + " minutter, " + color);
+        }
 
     }
 
@@ -229,8 +275,52 @@ public class UserInterface {
     }
 
     private int readInt(String prompt) {
-        System.out.print(prompt);
-        return Integer.parseInt(scanner.nextLine().trim());
+        return readInt(prompt, null);
+    }
+
+    private int readInt(String prompt, Integer oldValue) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+
+            if (input.isEmpty() && oldValue != null) {
+                return oldValue;
+            }
+
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                numberFormatExceptionMessage();
+            }
+        }
+    }
+
+    private static void numberFormatExceptionMessage() {
+        System.out.println("Dit input skal være et tal. Prøv igen.");
+    }
+
+    private static int getNextYear() {
+        LocalDate localDate = LocalDate.now();
+        return localDate.getYear() + 1;
+    }
+
+    private boolean readYesNo(String prompt) {
+        while (true) {
+            System.out.println(prompt);
+            String answer = scanner.nextLine().trim();
+
+            if (answer.equalsIgnoreCase("ja")
+                    || answer.equalsIgnoreCase("j")) {
+                return true;
+            }
+
+            if (answer.equalsIgnoreCase("nej")
+                    || answer.equalsIgnoreCase("n")) {
+                return false;
+            }
+
+            System.out.println("Svar ja eller nej.");
+        }
     }
 }
 
