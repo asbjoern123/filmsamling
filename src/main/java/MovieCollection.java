@@ -35,7 +35,7 @@ public class MovieCollection {
         movie.setInColor(inColor);
         movie.setLengthInMinutes(lengthInMinutes);
         movie.setYearCreated(yearCreated);
-        movie.setDate(date);
+        movie.setLastWatchedDate(date);
         return true;
     }
 

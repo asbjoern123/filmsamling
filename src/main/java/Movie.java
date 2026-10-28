@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Movie {
@@ -11,17 +10,17 @@ public class Movie {
     private int lengthInMinutes;
     private String genre;
     private static final int FIRST_MOVIE_YEAR = 1888;
-    private LocalDate date = null;
+    private LocalDate lastWatchedDate = null;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate date) {
+    public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate lastWatchedDate) {
         this.title = title;
         this.director = director;
         setYearCreated(yearCreated);
         this.inColor = inColor;
         this.lengthInMinutes = lengthInMinutes;
         this.genre = genre;
-        this.date = date;
+        this.lastWatchedDate = lastWatchedDate;
     }
 
     public String getTitle() {
@@ -49,12 +48,10 @@ public class Movie {
     }
 
     public void setTitle(String title) {
-
         this.title = title;
     }
 
     public void setDirector(String director) {
-
         this.director = director;
     }
 
@@ -79,14 +76,13 @@ public class Movie {
         this.genre = genre;
     }
 
+    public LocalDate getLastWatchedDate() {
+        return lastWatchedDate;
+    }
 
-public LocalDate getLastWatchedDate() {
-    return date;
-}
-
-public void setDate(LocalDate date) {
-    this.date = date;
-}
+    public void setLastWatchedDate(LocalDate lastWatchedDate) {
+        this.lastWatchedDate = lastWatchedDate;
+    }
 
 
 }
