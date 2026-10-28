@@ -188,25 +188,18 @@ public class UserInterface {
             newDirector = chosenMovie.getDirector();
         }
 
-        System.out.print("Årstal " + "[" + chosenMovie.getYearCreated() + "]: ");
+        int newYear = readInt(
+                "Årstal [" + chosenMovie.getYearCreated() + "]: ",
+                chosenMovie.getYearCreated()
+        );
 
-        int newYear = chosenMovie.getYearCreated();
-        while (true) {
-            String newYearString = scanner.nextLine();
+        while (newYear < 1888 || newYear > getYear() + 1) {
+            System.out.println("Årstallet skal være mellem 1888 og " + (getYear() + 1));
 
-            if (!newYearString.isBlank()) {
-                try {
-                    newYear = Integer.parseInt(newYearString);
-                    if (newYear > 1888 && newYear <= getYear()) {
-                        break;
-                    } else {
-                        System.out.println("Udgivelsesåret skal være mellem 1888-" + getYear());
-                        System.out.print("Prøv igen: ");
-                    }
-                } catch (NumberFormatException e) {
-                    numberFormatExceptionMessage();
-                }
-            } else break;
+            newYear = readInt(
+                    "Prøv igen. Enter beholder det gamle årstal: ",
+                    chosenMovie.getYearCreated()
+            );
         }
 
         boolean inColor = chosenMovie.isInColor();
@@ -234,20 +227,10 @@ public class UserInterface {
             System.out.println("Svar ja eller nej.");
         }
 
-        int newLength = chosenMovie.getLengthInMinutes();
-
-        System.out.print("Længde i minutter " + "[" + chosenMovie.getLengthInMinutes() + "]: ");
-        while (true) {
-            String newLengthString = scanner.nextLine();
-            if (!newLengthString.isBlank()) {
-                try {
-                    newLength = Integer.parseInt(newLengthString);
-                    break;
-                } catch (NumberFormatException e) {
-                    numberFormatExceptionMessage();
-                }
-            } else break;
-        }
+        int newLength = readInt(
+                "Længde i minutter [" + chosenMovie.getLengthInMinutes() + "]: ",
+                chosenMovie.getLengthInMinutes()
+        );
 
         System.out.print("Genre " + "[" + chosenMovie.getGenre() + "]: ");
         String newGenre = scanner.nextLine();
@@ -278,10 +261,20 @@ public class UserInterface {
     }
 
     private int readInt(String prompt) {
+        return readInt(prompt, null);
+    }
+
+    private int readInt(String prompt, Integer oldValue) {
         while (true) {
             System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+
+            if (input.isEmpty() && oldValue != null) {
+                return oldValue;
+            }
+
             try {
-                return Integer.parseInt(scanner.nextLine().trim());
+                return Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 numberFormatExceptionMessage();
             }
