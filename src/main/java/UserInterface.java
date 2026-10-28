@@ -37,7 +37,7 @@ public class UserInterface {
         while(true){
         yearCreated = readInt("Skriv udgivelses år: ");
 
-        if (yearCreated > 1888 && yearCreated <= getYear()) {
+        if (yearCreated >= 1888 && yearCreated <= getYear()) {
             break;
         }
         else System.out.println("Udgivelsesåret skal være mellem 1888-" + getYear());
@@ -193,8 +193,8 @@ public class UserInterface {
                 chosenMovie.getYearCreated()
         );
 
-        while (newYear < 1888 || newYear > getYear() + 1) {
-            System.out.println("Årstallet skal være mellem 1888 og " + (getYear() + 1));
+        while (newYear < 1888 || newYear > getYear()) {
+            System.out.println("Årstallet skal være mellem 1888 og " + (getYear()));
 
             newYear = readInt(
                     "Prøv igen. Enter beholder det gamle årstal: ",
