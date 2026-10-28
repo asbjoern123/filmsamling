@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -111,6 +112,12 @@ class MovieTest {
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
             movie.setLastWatchedDate(LocalDate.now().plusDays(1));
         });
+    }
+    @Test
+    void canMakeMovieYear1888(){
+        MovieCollection movieCollection = new MovieCollection();
+        movieCollection.addMovie("The Hunger Games", "Gary Ross", 1888, true, 142, "Action", null);
+        assertEquals(1,movieCollection.getMovies().size());
     }
 
 
