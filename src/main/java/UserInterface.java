@@ -34,13 +34,12 @@ public class UserInterface {
         String director = scanner.nextLine();
         int yearCreated = 0;
 
-        while(true){
-        yearCreated = readInt("Skriv udgivelses år: ");
+        while (true) {
+            yearCreated = readInt("Skriv udgivelses år: ");
 
-        if (yearCreated >= 1888 && yearCreated <= getYear()) {
-            break;
-        }
-        else System.out.println("Udgivelsesåret skal være mellem 1888-" + getYear());
+            if (yearCreated >= 1888 && yearCreated <= getNextYear()) {
+                break;
+            } else System.out.println("Udgivelsesåret skal være mellem 1888-" + getNextYear());
         }
 
         boolean inColor = readYesNo("Er filmen i farve? (ja/nej)");
@@ -193,8 +192,8 @@ public class UserInterface {
                 chosenMovie.getYearCreated()
         );
 
-        while (newYear < 1888 || newYear > getYear()) {
-            System.out.println("Årstallet skal være mellem 1888 og " + (getYear()));
+        while (newYear < 1888 || newYear > getNextYear()) {
+            System.out.println("Årstallet skal være mellem 1888 og " + (getNextYear()));
 
             newYear = readInt(
                     "Prøv igen. Enter beholder det gamle årstal: ",
@@ -238,16 +237,18 @@ public class UserInterface {
             newGenre = chosenMovie.getGenre();
         }
 
-        controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre);
+        boolean edited = controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre);
 
-        System.out.println("Filmen er opdateret:");
+        if (edited) {
+            System.out.println("Filmen er opdateret:");
 
-        System.out.println(chosenMovie.getTitle() + " (" + chosenMovie.getYearCreated() + ")");
-        System.out.println("  Instruktør: " + chosenMovie.getDirector());
-        System.out.println("  Genre: " + chosenMovie.getGenre());
-        String color = chosenMovie.isInColor() ? "farver" : "sort-hvid";
+            System.out.println(chosenMovie.getTitle() + " (" + chosenMovie.getYearCreated() + ")");
+            System.out.println("  Instruktør: " + chosenMovie.getDirector());
+            System.out.println("  Genre: " + chosenMovie.getGenre());
+            String color = chosenMovie.isInColor() ? "farver" : "sort-hvid";
 
-        System.out.println("  Længde: " + chosenMovie.getLengthInMinutes() + " minutter, " + color);
+            System.out.println("  Længde: " + chosenMovie.getLengthInMinutes() + " minutter, " + color);
+        }
 
     }
 
@@ -285,10 +286,11 @@ public class UserInterface {
         System.out.println("Dit input skal være et tal. Prøv igen.");
     }
 
-    private static int getYear() {
+    private static int getNextYear() {
         LocalDate localDate = LocalDate.now();
-        return localDate.getYear();
+        return localDate.getYear() + 1;
     }
+
     private boolean readYesNo(String prompt) {
         while (true) {
             System.out.println(prompt);

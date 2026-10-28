@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Movie {
     private String title;
     private String director;
@@ -5,11 +7,13 @@ public class Movie {
     private boolean inColor;
     private int lengthInMinutes;
     private String genre;
+    private static final int FIRST_MOVIE_YEAR = 1888;
+
 
     public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre){
         this.title = title;
         this.director = director;
-        this.yearCreated = yearCreated;
+        setYearCreated(yearCreated);
         this.inColor = inColor;
         this.lengthInMinutes = lengthInMinutes;
         this.genre = genre;
@@ -40,7 +44,13 @@ public class Movie {
         public void setDirector (String director){
             this.director = director;
         }
-        public void setYearCreated (int yearCreated) {
+
+        public void setYearCreated(int yearCreated) {
+            int latestYear = LocalDate.now().getYear() + 1;
+            if (yearCreated < FIRST_MOVIE_YEAR || yearCreated > latestYear) {
+                throw new IllegalArgumentException(
+                        "Årstallet skal være mellem " + FIRST_MOVIE_YEAR + " og " + latestYear + ".");
+            }
             this.yearCreated = yearCreated;
         }
         public void setInColor (boolean inColor){
