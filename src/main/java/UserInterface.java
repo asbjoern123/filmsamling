@@ -248,7 +248,7 @@ public class UserInterface {
             newdate = LocalDate.parse(newdateText, formatter);
         }
 
-        boolean edited = controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre);
+        boolean edited = controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre, newdate);
 
         controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre, newdate);
 
