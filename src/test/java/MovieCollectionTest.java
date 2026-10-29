@@ -1,6 +1,8 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,9 +15,9 @@ class MovieCollectionTest {
     void setUp(){
         // Kører før HVER test – så starter alle tests med den samme, friske samling
         collection = new MovieCollection();
-        collection.addMovie("The Godfather", "Francis Ford Coppola", 1972, true, 175, "Crime",null);
-        collection.addMovie("Casablanca", "Michael Curtiz", 1942, false, 102, "Drama",null);
-        collection.addMovie("Godzilla", "Ishirō Honda", 1954, false, 96, "Sci-fi",null);
+        collection.addMovie("The Godfather", "Francis Ford Coppola", 1972, true, 175, "Crime",LocalDate.now());
+        collection.addMovie("Casablanca", "Michael Curtiz", 1942, false, 102, "Drama",LocalDate.now());
+        collection.addMovie("Godzilla", "Ishirō Honda", 1954, false, 96, "Sci-fi",LocalDate.now());
     }
 
     @Test
@@ -35,7 +37,7 @@ class MovieCollectionTest {
         MovieCollection movieCollection = new MovieCollection();
 
         // Act
-        movieCollection.addMovie("Jaws","Steven Spielberg",1995,true ,124, "Thriller",null);
+        movieCollection.addMovie("Jaws","Steven Spielberg",1995,true ,124, "Thriller",LocalDate.now());
 
         // Assert
         assertEquals("Jaws", movieCollection.getMovies().get(0).getTitle());
@@ -47,8 +49,8 @@ class MovieCollectionTest {
         // Intet, "setup" har allerede lavet en samling med 3 film
 
         // Act
-        collection.addMovie("Jaws","Steven Spielberg",1995,true,124, "Thriller",null);
-        collection.addMovie("Jaws2","Steven Spielberg", 1995, true, 127, "Thriller",null);
+        collection.addMovie("Jaws","Steven Spielberg",1995,true,124, "Thriller",LocalDate.now());
+        collection.addMovie("Jaws2","Steven Spielberg", 1995, true, 127, "Thriller",LocalDate.now());
 
         // Assert
         assertEquals(5, collection.getNumberOfMovies());
@@ -59,7 +61,7 @@ class MovieCollectionTest {
         Movie movie = collection.getMovies().get(0);
 
         // Act
-        boolean result = collection.editMovie(movie, "Shrek", "James", 2002, true, 129, "Comedy",null);
+        boolean result = collection.editMovie(movie, "Shrek", "James", 2002, true, 129, "Comedy",LocalDate.now());
 
         // Assert
         assertEquals("Shrek", movie.getTitle());
@@ -68,10 +70,10 @@ class MovieCollectionTest {
     @Test
     void editMovieNotInCollection(){
         // Arrange
-        Movie movie = new Movie("Titanic", "James Cameron", 1997, true, 195, "Drama",null);
+        Movie movie = new Movie("Titanic", "James Cameron", 1997, true, 195, "Drama",LocalDate.now());
 
         // Act
-        boolean result = collection.editMovie(movie, "Shrek", "James", 2002, true, 129, "Comedy",null);
+        boolean result = collection.editMovie(movie, "Shrek", "James", 2002, true, 129, "Comedy",LocalDate.now());
 
         // Assert
         assertFalse(result);
@@ -115,11 +117,37 @@ class MovieCollectionTest {
     }
     @Test
     void deleteMovieThatDosentExist(){
-        Movie blablabla = new Movie("blablabla","ask",1990,true,90,"gyser",null);
+        Movie blablabla = new Movie("blablabla","ask",1990,true,90,"gyser", LocalDate.now());
 
         boolean deletemovie = collection.deleteMovie(blablabla);
 
         assertFalse(deletemovie);
         assertEquals(3,collection.getMovies().size());
+    }
+
+    @Test
+    void editMovieWrongInput() {
+        // Arrange
+        Movie movie = collection.getMovies().get(0);
+        String titleBefore = movie.getTitle();
+        String directorBefore = movie.getDirector();
+        int yearBefore = movie.getYearCreated();
+        boolean colorBefore = movie.isInColor();
+        int lengthBefore = movie.getLengthInMinutes();
+        String genreBefore = movie.getGenre();
+        LocalDate dateBefore = movie.getLastWatchedDate();
+
+        // Act + Asserts
+        Assertions.assertThrows(IllegalArgumentException.class, () ->{
+            collection.editMovie(movie, titleBefore + " ændret", directorBefore + " ændret", LocalDate.now().plusYears(2).getYear(), !colorBefore, 120, "Comedy", LocalDate.of(2020, 1, 1));
+        });
+
+        assertEquals(titleBefore, movie.getTitle());
+        assertEquals(directorBefore, movie.getDirector());
+        assertEquals(yearBefore, movie.getYearCreated());
+        assertEquals(colorBefore, movie.isInColor());
+        assertEquals(lengthBefore, movie.getLengthInMinutes());
+        assertEquals(genreBefore, movie.getGenre());
+        assertEquals(dateBefore, movie.getLastWatchedDate());
     }
 }

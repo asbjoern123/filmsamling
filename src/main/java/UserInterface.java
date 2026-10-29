@@ -148,6 +148,7 @@ public class UserInterface {
                 System.out.println("Genre: " + movie.getGenre());
                 System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
                 System.out.println("sidst set " + movie.getLastWatchedDate().format(formatter));
+                System.out.println();
             }
         }
     }
