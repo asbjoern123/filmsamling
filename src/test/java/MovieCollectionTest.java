@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,7 +60,7 @@ class MovieCollectionTest {
         Movie movie = collection.getMovies().get(0);
 
         // Act
-        boolean result = collection.editMovie(movie, "Shrek", "James", 2002, true, 129, "Comedy",null);
+        boolean result = collection.editMovie(movie, "Shrek", "James", 2002, true, 129, "Comedy", LocalDate.now());
 
         // Assert
         assertEquals("Shrek", movie.getTitle());
