@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +9,7 @@ class MovieTest {
     @Test
     void constructorSetsAllFields() {
         Movie movie = new Movie(
-                "The Hunger Games", "Gary Ross", 2012, true, 142, "Action",null);
+                "The Hunger Games", "Gary Ross", 2012, true, 142, "Action",LocalDate.now());
 
         assertEquals("The Hunger Games", movie.getTitle());
         assertEquals("Gary Ross", movie.getDirector());
@@ -24,7 +22,7 @@ class MovieTest {
     @Test
     void setTitleChangesTitle() {
         Movie movie = new Movie(
-                "The Hunger Games", "Gary Ross", 2012, true, 142, "Action",null);
+                "The Hunger Games", "Gary Ross", 2012, true, 142, "Action",LocalDate.now());
 
         movie.setTitle("Hunger Games");
 
@@ -34,18 +32,18 @@ class MovieTest {
     @Test
     void setInvalidYearCreated(){
         // Arrange
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", LocalDate.now());
 
         // Act + Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
-            movie.setYearCreated(6767);
+            movie.setYearCreated(LocalDate.now().plusYears(2).getYear());
         });
     }
 
     @Test
     void setInvalidTitle(){
         // Arrange
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", LocalDate.now());
 
         // Act + Asserts
         Assertions.assertThrows(NullPointerException.class, () ->{
@@ -61,7 +59,7 @@ class MovieTest {
     @Test
     void setInvalidDirector(){
         // Arrange
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", LocalDate.now());
 
         // Act + Asserts
         Assertions.assertThrows(NullPointerException.class, () ->{
@@ -78,7 +76,7 @@ class MovieTest {
     @Test
     void setInvalidGenre(){
         // Arrange
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", LocalDate.now());
 
         // Act + Asserts
         Assertions.assertThrows(NullPointerException.class, () ->{
@@ -95,7 +93,7 @@ class MovieTest {
     @Test
     void setInvalidLength(){
         // Arrange
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", LocalDate.now());
 
         // Act + Asserts
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
@@ -107,17 +105,19 @@ class MovieTest {
     }
     @Test
     void setInvalidWatchDate(){
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", null);
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", LocalDate.now());
 
         Assertions.assertThrows(IllegalArgumentException.class, () ->{
             movie.setLastWatchedDate(LocalDate.now().plusDays(1));
         });
     }
+
     @Test
     void canMakeMovieYear1888(){
-        MovieCollection movieCollection = new MovieCollection();
-        movieCollection.addMovie("The Hunger Games", "Gary Ross", 1888, true, 142, "Action", null);
-        assertEquals(1,movieCollection.getMovies().size());
+        // Arrange + Act + Assert
+        Assertions.assertDoesNotThrow(() ->{
+                Movie movie = new Movie("The Hunger Games", "Gary Ross", 1888, true, 142, "Action", LocalDate.now());
+        });
     }
 
 

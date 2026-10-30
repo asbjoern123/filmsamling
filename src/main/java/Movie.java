@@ -15,13 +15,13 @@ public class Movie {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate lastWatchedDate) {
-        this.title = title;
-        this.director = director;
+        setTitle(title);
+        setDirector(director);
         setYearCreated(yearCreated);
         this.inColor = inColor;
-        this.lengthInMinutes = lengthInMinutes;
-        this.genre = genre;
-        this.lastWatchedDate = lastWatchedDate;
+        setLengthInMinutes(lengthInMinutes);
+        setGenre(genre);
+        setLastWatchedDate(lastWatchedDate);
     }
 
     public String getTitle() {
@@ -57,7 +57,7 @@ public class Movie {
     }
 
     public void setDirector(String director) {
-        if(director.isEmpty() || director.trim().isEmpty() || director == null )
+        if(director.isEmpty() || director.trim().isEmpty())
             throw new IllegalArgumentException(
                     "En film skal have en director"
             );
@@ -86,7 +86,7 @@ public class Movie {
     }
 
     public void setGenre(String genre) {
-        if(genre.isEmpty() || genre.trim().isEmpty() || genre == null )
+        if(genre.isEmpty() || genre.trim().isEmpty())
             throw new IllegalArgumentException(
                     "En film skal have en genre"
             );
