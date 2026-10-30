@@ -29,6 +29,9 @@ public class MovieCollection {
         if (!movies.contains(movie)) {
             return false;
         }
+
+        new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre, date);
+
         movie.setTitle(title);
         movie.setDirector(director);
         movie.setGenre(genre);
@@ -36,6 +39,7 @@ public class MovieCollection {
         movie.setLengthInMinutes(lengthInMinutes);
         movie.setYearCreated(yearCreated);
         movie.setLastWatchedDate(date);
+
         return true;
     }
 

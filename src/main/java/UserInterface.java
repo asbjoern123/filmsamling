@@ -258,8 +258,6 @@ public class UserInterface {
 
         boolean edited = controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre, newDate);
 
-        controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre, newDate);
-
         if (edited) {
             System.out.println("Filmen er opdateret:");
 
