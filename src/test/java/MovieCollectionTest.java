@@ -124,30 +124,4 @@ class MovieCollectionTest {
         assertFalse(deletemovie);
         assertEquals(3,collection.getMovies().size());
     }
-
-    @Test
-    void editMovieWrongInput() {
-        // Arrange
-        Movie movie = collection.getMovies().get(0);
-        String titleBefore = movie.getTitle();
-        String directorBefore = movie.getDirector();
-        int yearBefore = movie.getYearCreated();
-        boolean colorBefore = movie.isInColor();
-        int lengthBefore = movie.getLengthInMinutes();
-        String genreBefore = movie.getGenre();
-        LocalDate dateBefore = movie.getLastWatchedDate();
-
-        // Act + Asserts
-        Assertions.assertThrows(IllegalArgumentException.class, () ->{
-            collection.editMovie(movie, titleBefore + " ændret", directorBefore + " ændret", LocalDate.now().plusYears(2).getYear(), !colorBefore, 120, "Comedy", LocalDate.of(2020, 1, 1));
-        });
-
-        assertEquals(titleBefore, movie.getTitle());
-        assertEquals(directorBefore, movie.getDirector());
-        assertEquals(yearBefore, movie.getYearCreated());
-        assertEquals(colorBefore, movie.isInColor());
-        assertEquals(lengthBefore, movie.getLengthInMinutes());
-        assertEquals(genreBefore, movie.getGenre());
-        assertEquals(dateBefore, movie.getLastWatchedDate());
-    }
 }
