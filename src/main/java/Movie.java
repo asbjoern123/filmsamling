@@ -98,14 +98,22 @@ public LocalDate getLastWatchedDate() {
     return lastWatchedDate;
 }
 
-public void setLastWatchedDate(LocalDate date) {
-        LocalDate today = LocalDate.now();
-    if (date.isAfter(today)){
-        throw new IllegalArgumentException(
-                "du kan ikke havet set filmen i fremtiden");
+    public void markAsWatched(LocalDate date) {
+        if (date == null) {
+            throw new IllegalArgumentException("Du skal angive en dato.");
+        }
+
+        if (date.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException(
+                    "Datoen må ikke ligge i fremtiden.");
+        }
+
+        this.lastWatchedDate = date;
     }
-    this.lastWatchedDate = date;
-}
+
+    public void setLastWatchedDate(LocalDate date) {
+        markAsWatched(date);
+    }
 
 
 }

@@ -104,12 +104,19 @@ class MovieTest {
         });
     }
     @Test
-    void setInvalidWatchDate(){
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", LocalDate.now());
+    void futureWatchDateIsRejected() {
+        LocalDate oldDate = LocalDate.of(2025, 1, 1);
 
-        Assertions.assertThrows(IllegalArgumentException.class, () ->{
-            movie.setLastWatchedDate(LocalDate.now().plusDays(1));
+        Movie movie = new Movie(
+                "The Hunger Games", "Gary Ross", 2012,
+                true, 142, "Action", oldDate
+        );
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            movie.markAsWatched(LocalDate.now().plusYears(1));
         });
+
+        assertEquals(oldDate, movie.getLastWatchedDate());
     }
 
     @Test
