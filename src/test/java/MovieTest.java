@@ -119,9 +119,33 @@ class MovieTest {
                 Movie movie = new Movie("The Hunger Games", "Gary Ross", 1888, true, 142, "Action", LocalDate.now());
         });
     }
+    @Test
+    void year1887IsRejected() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Movie(
+                    "The Hunger Games",
+                    "Gary Ross",
+                    1887,
+                    true,
+                    142,
+                    "Action",
+                    LocalDate.of(2025, 1, 1)
+            );
+        });
+    }
+    @Test
+    void invalidTitleKeepsOldTitle() {
+        Movie movie = new Movie(
+                "The Hunger Games", "Gary Ross", 2012,
+                true, 142, "Action", LocalDate.of(2025, 1, 1)
+        );
 
+        assertThrows(IllegalArgumentException.class, () -> {
+            movie.setTitle("");
+        });
 
-
+        assertEquals("The Hunger Games", movie.getTitle());
+    }
 
 
 }
