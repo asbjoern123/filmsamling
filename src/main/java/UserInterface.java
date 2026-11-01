@@ -35,15 +35,8 @@ public class UserInterface {
 
         System.out.print("Skriv en instruktør: ");
         String director = scanner.nextLine();
-        int yearCreated = 0;
 
-        while (true) {
-            yearCreated = readInt("Skriv udgivelses år: ");
-
-            if (yearCreated >= 1888 && yearCreated <= getNextYear()) {
-                break;
-            } else System.out.println("Udgivelsesåret skal være mellem 1888-" + getNextYear());
-        }
+        int yearCreated = readInt("Skriv udgivelsesår: ");
 
         boolean inColor = readYesNo("Er filmen i farve? (ja/nej)");
 
@@ -51,12 +44,16 @@ public class UserInterface {
 
         System.out.print("Skriv en genre: ");
         String genre = scanner.nextLine();
-        System.out.println("Hvornår så du sidst filmen (dd-MM-yyyy");
-        String dateText = scanner.nextLine();
-        LocalDate lastDate = LocalDate.parse(dateText, formatter);
 
-        controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre, lastDate);
-        System.out.println(title + " er tilføjet til samlingen.");
+        try {
+            controller.addMovie(
+                    title, director, yearCreated,
+                    inColor, lengthInMinutes, genre
+            );
+            System.out.println(title + " er tilføjet til samlingen.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Filmen blev ikke oprettet: " + e.getMessage());
+        }
     }
 
     public void deleteMovie() {
@@ -130,7 +127,12 @@ public class UserInterface {
             System.out.println("Farver: " + color);
             System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
             System.out.println("Genre: " + movie.getGenre());
-            System.out.println("Sidst set: " + movie.getLastWatchedDate().format(formatter));
+            if (movie.getLastWatchedDate() == null) {
+                System.out.println("Sidst set: aldrig set");
+            } else {
+                System.out.println("Sidst set: "
+                        + movie.getLastWatchedDate().format(formatter));
+            }
             System.out.println();
         }
 
@@ -147,7 +149,12 @@ public class UserInterface {
                 System.out.println("Instruktør: " + movie.getDirector());
                 System.out.println("Genre: " + movie.getGenre());
                 System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
-                System.out.println("sidst set " + movie.getLastWatchedDate().format(formatter));
+                if (movie.getLastWatchedDate() == null) {
+                    System.out.println("Sidst set: aldrig set");
+                } else {
+                    System.out.println("Sidst set: "
+                            + movie.getLastWatchedDate().format(formatter));
+                }
                 System.out.println();
             }
         }
