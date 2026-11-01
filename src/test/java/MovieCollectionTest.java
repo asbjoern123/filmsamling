@@ -148,4 +148,19 @@ class MovieCollectionTest {
         assertEquals("Casablanca", casablanca.getTitle());
         assertEquals(1942, casablanca.getYearCreated());
     }
+    @Test
+    void addMovieWithoutDateStartsUnwatched() {
+        MovieCollection movieCollection = new MovieCollection();
+
+        movieCollection.addMovie(
+                "The Hunger Games", "Gary Ross", 2012,
+                true, 142, "Action"
+        );
+
+        assertEquals(1, movieCollection.getNumberOfMovies());
+
+        Movie movie = movieCollection.getMovies().get(0);
+        assertEquals("The Hunger Games", movie.getTitle());
+        assertNull(movie.getLastWatchedDate());
+    }
 }
