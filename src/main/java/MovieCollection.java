@@ -32,6 +32,25 @@ public class MovieCollection {
         return movies.remove(movie);
     }
 
+    public boolean editMovie(Movie movie, String title, String director,
+                             int yearCreated, boolean inColor,
+                             int lengthInMinutes, String genre) {
+        if (!movies.contains(movie)) {
+            return false;
+        }
+
+        new Movie(title, director, yearCreated,
+                inColor, lengthInMinutes, genre);
+
+        movie.setTitle(title);
+        movie.setDirector(director);
+        movie.setYearCreated(yearCreated);
+        movie.setInColor(inColor);
+        movie.setLengthInMinutes(lengthInMinutes);
+        movie.setGenre(genre);
+
+        return true;
+    }
     public boolean editMovie(Movie movie, String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre,LocalDate date) {
         if (!movies.contains(movie)) {
             return false;

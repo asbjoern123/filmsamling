@@ -253,28 +253,19 @@ public class UserInterface {
         if (newGenre.isBlank()) {
             newGenre = chosenMovie.getGenre();
         }
-        System.out.print("sidst set " + "[" + chosenMovie.getLastWatchedDate() + "]: ");
-        String newDateText = scanner.next();
-        LocalDate newDate;
+        try {
+            boolean edited = controller.editMovie(
+                    chosenMovie, newTitle, newDirector, newYear,
+                    inColor, newLength, newGenre
+            );
 
-        if (newDateText.isBlank()) {
-            newDate = chosenMovie.getLastWatchedDate();
-        } else {
-            newDate = LocalDate.parse(newDateText, formatter);
-        }
-
-        boolean edited = controller.editMovie(chosenMovie, newTitle, newDirector, newYear, inColor, newLength, newGenre, newDate);
-
-        if (edited) {
-            System.out.println("Filmen er opdateret:");
-
-            System.out.println(chosenMovie.getTitle() + " (" + chosenMovie.getYearCreated() + ")");
-            System.out.println("  Instruktør: " + chosenMovie.getDirector());
-            System.out.println("  Genre: " + chosenMovie.getGenre());
-            String color = chosenMovie.isInColor() ? "farver" : "sort-hvid";
-            System.out.println("  sids set: " + chosenMovie.getLastWatchedDate().format(formatter));
-
-            System.out.println("  Længde: " + chosenMovie.getLengthInMinutes() + " minutter, " + color);
+            if (edited) {
+                System.out.println("Filmen er opdateret.");
+            } else {
+                System.out.println("Filmen kunne ikke findes i samlingen.");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Filmen blev ikke ændret: " + e.getMessage());
         }
 
     }
