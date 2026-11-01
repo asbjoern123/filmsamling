@@ -14,6 +14,17 @@ public class Movie {
     private LocalDate lastWatchedDate = null;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+    //NY constructor uden dato
+    public Movie(String title, String director, int yearCreated,
+                 boolean inColor, int lengthInMinutes, String genre) {
+        setTitle(title);
+        setDirector(director);
+        setYearCreated(yearCreated);
+        setInColor(inColor);
+        setLengthInMinutes(lengthInMinutes);
+        setGenre(genre);
+    }
+    //Den eksisterende constructor
     public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate lastWatchedDate) {
         setTitle(title);
         setDirector(director);

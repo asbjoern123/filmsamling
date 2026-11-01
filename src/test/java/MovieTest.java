@@ -154,5 +154,13 @@ class MovieTest {
         assertEquals("The Hunger Games", movie.getTitle());
     }
 
+    @Test
+    void newMovieStartsUnwatched() {
+        Movie movie = new Movie(
+                "The Hunger Games", "Gary Ross", 2012,
+                true, 142, "Action"
+        );
 
+        assertNull(movie.getLastWatchedDate());
+    }
 }
