@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class Movie {
+public class Movie implements Comparable<Movie> {
     private String title;
     private String director;
     private int yearCreated;
@@ -140,4 +140,8 @@ public class Movie {
         return ChronoUnit.DAYS.between(lastWatchedDate, today);
     }
 
+    @Override
+    public int compareTo(Movie other) {
+        return title.compareToIgnoreCase(other.title);
+    }
 }
