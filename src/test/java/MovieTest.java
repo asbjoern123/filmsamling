@@ -119,7 +119,18 @@ class MovieTest {
                 Movie movie = new Movie("The Hunger Games", "Gary Ross", 1888, true, 142, "Action", LocalDate.now());
         });
     }
+    @Test
+    void daysSinceWatchedCountsAcrossMonths() {
+        // Arrange
+        Movie movie = new Movie("Jaws", "Steven Spielberg", 1975, true, 124, "Thriller",LocalDate.now());
+        movie.setLastWatchedDate(LocalDate.of(2025, 9, 26));
 
+        // Act
+        long days = movie.getLastWatchedDate().getDayOfMonth();
+
+        // Assert
+        assertEquals(26, days);
+    }
 
 
 
