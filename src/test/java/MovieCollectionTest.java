@@ -206,4 +206,19 @@ class MovieCollectionTest {
         assertEquals("The Hunger Games 2", result.get(1).getTitle());
     }
 
+    @Test
+    void addExistingMovie(){
+
+        // Arrange
+        MovieCollection movieCollection = new MovieCollection();
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2012, true, 142, "Action");
+
+        // Act
+        movieCollection.addMovie(movie);
+
+        // Assert
+        assertSame(movie, movieCollection.getMovies().getFirst());
+
+    }
+
 }

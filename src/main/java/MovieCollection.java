@@ -20,6 +20,10 @@ public class MovieCollection {
         movies.add(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre, date));
     }
 
+    public void addMovie(Movie movie){
+        movies.add(movie);
+    }
+
 
     public int getNumberOfMovies() {
 
