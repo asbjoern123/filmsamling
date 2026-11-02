@@ -136,5 +136,4 @@ public class Movie {
         return (int) ChronoUnit.DAYS.between(lastWatchedDate, today);
     }
 
-
 }

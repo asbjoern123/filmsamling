@@ -113,27 +113,7 @@ public class UserInterface {
         }
 
         for (Movie movie : matches) {
-            String color;
-
-            if (movie.isInColor()) {
-                color = "Farver";
-            } else {
-                color = "Sort-hvid";
-            }
-
-            System.out.println("Titel: " + movie.getTitle());
-            System.out.println("Instruktør: " + movie.getDirector());
-            System.out.println("Årstal: " + movie.getYearCreated());
-            System.out.println("Farver: " + color);
-            System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
-            System.out.println("Genre: " + movie.getGenre());
-            if (movie.getLastWatchedDate() == null) {
-                System.out.println("Sidst set: aldrig set");
-            } else {
-                System.out.println("Sidst set: "
-                        + movie.getLastWatchedDate().format(formatter));
-            }
-            System.out.println();
+            printMovieInfo(movie);
         }
 
     }
@@ -144,18 +124,7 @@ public class UserInterface {
             System.out.println("Filmlisten er tom");
         } else {
             for (Movie movie : movies) {
-                String color = movie.isInColor() ? "farver" : "sort-hvid";
-                System.out.println(movie.getTitle() + " (" + movie.getYearCreated() + ") i " + color);
-                System.out.println("Instruktør: " + movie.getDirector());
-                System.out.println("Genre: " + movie.getGenre());
-                System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
-                if (movie.getLastWatchedDate() == null) {
-                    System.out.println("Sidst set: aldrig set");
-                } else {
-                    System.out.println("Sidst set: "
-                            + movie.getLastWatchedDate().format(formatter));
-                }
-                System.out.println();
+                printMovieInfo(movie);
             }
         }
     }
@@ -261,18 +230,7 @@ public class UserInterface {
 
             if (edited) {
                 System.out.println("Filmen er opdateret:");
-                String color = chosenMovie.isInColor() ? "farver" : "sort-hvid";
-                System.out.println(chosenMovie.getTitle() + " (" + chosenMovie.getYearCreated() + ") i " + color);
-                System.out.println("Instruktør: " + chosenMovie.getDirector());
-                System.out.println("Genre: " + chosenMovie.getGenre());
-                System.out.println("Længde: " + chosenMovie.getLengthInMinutes() + " minutter");
-                if (chosenMovie.getLastWatchedDate() == null) {
-                    System.out.println("Sidst set: aldrig set");
-                } else {
-                    System.out.println("Sidst set: "
-                            + chosenMovie.getLastWatchedDate().format(formatter));
-                }
-                System.out.println();
+               printMovieInfo(chosenMovie);
 
             } else {
                 System.out.println("Filmen kunne ikke findes i samlingen.");
@@ -339,6 +297,22 @@ public class UserInterface {
 
             System.out.println("Svar ja eller nej.");
         }
+    }
+    private void printMovieInfo(Movie movie){
+        System.out.println("titel: " + movie.getTitle());
+        System.out.println("director: " + movie.getDirector());
+        System.out.println("udgivelses år: " + movie.getYearCreated());
+        System.out.println("i farve: " + (movie.isInColor() ? "farvet" : "sorthvid"));
+        System.out.println("længede i min: " + movie.getLengthInMinutes());
+        System.out.println("genre: " + movie.getGenre());
+
+        if(movie.getLastWatchedDate() == null){
+            System.out.println("sidst set: aldrig" );
+        }
+        else {
+            System.out.println("sidst set: " + movie.getLastWatchedDate().format(formatter));
+        }
+        System.out.println();
     }
 }
 
