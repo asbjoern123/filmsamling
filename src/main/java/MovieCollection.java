@@ -86,7 +86,7 @@ public class MovieCollection {
         ArrayList<Movie> matches = new ArrayList<>();
 
         for (Movie movie : movies) {
-            if (movie.getLastWatchedDate().isBefore(date) || !movie.hasBeenWatched()) {
+            if (!movie.hasBeenWatched() || movie.getLastWatchedDate().isBefore(date)) {
                 matches.add(movie);
             }
         }
