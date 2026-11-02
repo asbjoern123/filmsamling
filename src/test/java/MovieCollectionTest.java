@@ -218,6 +218,7 @@ class MovieCollectionTest {
 
         // Assert
         assertSame(movie, movieCollection.getMovies().getFirst());
+        assertEquals(1, movieCollection.getNumberOfMovies());
 
     }
 
