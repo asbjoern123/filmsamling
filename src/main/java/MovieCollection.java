@@ -19,9 +19,7 @@ public class MovieCollection {
                 inColor, lengthInMinutes, genre
         ));
     }
-    public void addMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate date) {
-        movies.add(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre, date));
-    }
+
 
     public int getNumberOfMovies() {
 
