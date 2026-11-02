@@ -38,7 +38,14 @@ public class Controller {
             return false;
         }
     }
+    public void markAsWatched(Movie movie, LocalDate date) {
+        movie.markAsWatched(date);
 
+    }
+    public ArrayList<Movie> getMoviesNotWatchedForDays(int days) {
+        LocalDate cutoff = LocalDate.now().minusDays(days);
+        return movieCollection.getMoviesNotWatchedSince(cutoff);
+    }
 }
 
 
