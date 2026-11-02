@@ -132,8 +132,8 @@ public class Movie {
         return lastWatchedDate != null;
     }
 
-    public int getDaysSinceWatched(LocalDate today){
-        return (int) ChronoUnit.DAYS.between(lastWatchedDate, today);
+    public long getDaysSinceWatched(LocalDate today){
+        return ChronoUnit.DAYS.between(lastWatchedDate, today);
     }
 
 }
