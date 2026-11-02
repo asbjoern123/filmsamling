@@ -8,7 +8,7 @@ public class UserInterface {
     Scanner scanner = new Scanner(System.in);
     Controller controller = new Controller();
     public boolean running = true;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 
     public void startProgram() {
@@ -306,11 +306,13 @@ public class UserInterface {
         System.out.println("længede i min: " + movie.getLengthInMinutes());
         System.out.println("genre: " + movie.getGenre());
 
+
         if(movie.getLastWatchedDate() == null){
             System.out.println("sidst set: aldrig" );
         }
         else {
-            System.out.println("sidst set: " + movie.getLastWatchedDate().format(formatter));
+            long days = movie.getDaysSinceWatched(LocalDate.now());
+            System.out.println("Sidst set: " + movie.getLastWatchedDate().format(formatter) + " (" + days + " dage siden)");
         }
         System.out.println();
     }
