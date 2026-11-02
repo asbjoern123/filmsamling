@@ -5,6 +5,13 @@ public class Controller {
 
     private MovieCollection movieCollection = new MovieCollection();
 
+    public void addMovie(String title, String director, int yearCreated,
+                         boolean inColor, int lengthInMinutes, String genre) {
+        movieCollection.addMovie(
+                title, director, yearCreated,
+                inColor, lengthInMinutes, genre
+        );
+    }
     public void addMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate date) {
         movieCollection.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre, date);
     }
@@ -17,6 +24,14 @@ public class Controller {
         return movieCollection.searchMovies(searchText);
     }
 
+    public boolean editMovie(Movie movie, String title, String director,
+                             int yearCreated, boolean inColor,
+                             int lengthInMinutes, String genre) {
+        return movieCollection.editMovie(
+                movie, title, director, yearCreated,
+                inColor, lengthInMinutes, genre
+        );
+    }
     public boolean editMovie(Movie movie, String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate date) {
         return movieCollection.editMovie(movie, title, director, yearCreated, inColor, lengthInMinutes, genre, date);
     }

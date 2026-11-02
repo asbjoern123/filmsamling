@@ -104,12 +104,19 @@ class MovieTest {
         });
     }
     @Test
-    void setInvalidWatchDate(){
-        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2025, true, 142, "Action", LocalDate.now());
+    void futureWatchDateIsRejected() {
+        LocalDate oldDate = LocalDate.of(2025, 1, 1);
 
-        Assertions.assertThrows(IllegalArgumentException.class, () ->{
-            movie.setLastWatchedDate(LocalDate.now().plusDays(1));
+        Movie movie = new Movie(
+                "The Hunger Games", "Gary Ross", 2012,
+                true, 142, "Action", oldDate
+        );
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            movie.markAsWatched(LocalDate.now().plusYears(1));
         });
+
+        assertEquals(oldDate, movie.getLastWatchedDate());
     }
 
     @Test
@@ -124,6 +131,26 @@ class MovieTest {
         // Arrange
         Movie movie = new Movie("Jaws", "Steven Spielberg", 1975, true, 124, "Thriller",LocalDate.now());
         movie.setLastWatchedDate(LocalDate.of(2025, 9, 26));
+    @Test
+    void year1887IsRejected() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Movie(
+                    "The Hunger Games",
+                    "Gary Ross",
+                    1887,
+                    true,
+                    142,
+                    "Action",
+                    LocalDate.of(2025, 1, 1)
+            );
+        });
+    }
+    @Test
+    void invalidTitleKeepsOldTitle() {
+        Movie movie = new Movie(
+                "The Hunger Games", "Gary Ross", 2012,
+                true, 142, "Action", LocalDate.of(2025, 1, 1)
+        );
 
         // Act
         long days = movie.getLastWatchedDate().getDayOfMonth();
@@ -131,8 +158,20 @@ class MovieTest {
         // Assert
         assertEquals(26, days);
     }
+        assertThrows(IllegalArgumentException.class, () -> {
+            movie.setTitle("");
+        });
 
+        assertEquals("The Hunger Games", movie.getTitle());
+    }
 
+    @Test
+    void newMovieStartsUnwatched() {
+        Movie movie = new Movie(
+                "The Hunger Games", "Gary Ross", 2012,
+                true, 142, "Action"
+        );
 
-
+        assertNull(movie.getLastWatchedDate());
+    }
 }
