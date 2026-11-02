@@ -260,7 +260,20 @@ public class UserInterface {
             );
 
             if (edited) {
-                System.out.println("Filmen er opdateret.");
+                System.out.println("Filmen er opdateret:");
+                String color = chosenMovie.isInColor() ? "farver" : "sort-hvid";
+                System.out.println(chosenMovie.getTitle() + " (" + chosenMovie.getYearCreated() + ") i " + color);
+                System.out.println("Instruktør: " + chosenMovie.getDirector());
+                System.out.println("Genre: " + chosenMovie.getGenre());
+                System.out.println("Længde: " + chosenMovie.getLengthInMinutes() + " minutter");
+                if (chosenMovie.getLastWatchedDate() == null) {
+                    System.out.println("Sidst set: aldrig set");
+                } else {
+                    System.out.println("Sidst set: "
+                            + chosenMovie.getLastWatchedDate().format(formatter));
+                }
+                System.out.println();
+
             } else {
                 System.out.println("Filmen kunne ikke findes i samlingen.");
             }
