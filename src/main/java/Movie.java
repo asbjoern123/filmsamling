@@ -2,6 +2,7 @@ import java.time.LocalDate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Movie {
     private String title;
@@ -24,6 +25,7 @@ public class Movie {
         setLengthInMinutes(lengthInMinutes);
         setGenre(genre);
     }
+
     //Den eksisterende constructor
     public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate lastWatchedDate) {
         setTitle(title);
@@ -60,7 +62,7 @@ public class Movie {
     }
 
     public void setTitle(String title) {
-        if(title.isEmpty() || title.trim().isEmpty())
+        if (title.isEmpty() || title.trim().isEmpty())
             throw new IllegalArgumentException(
                     "En film skal have en titel"
             );
@@ -68,7 +70,7 @@ public class Movie {
     }
 
     public void setDirector(String director) {
-        if(director.isEmpty() || director.trim().isEmpty())
+        if (director.isEmpty() || director.trim().isEmpty())
             throw new IllegalArgumentException(
                     "En film skal have en director"
             );
@@ -89,7 +91,7 @@ public class Movie {
     }
 
     public void setLengthInMinutes(int lengthInMinutes) {
-        if (lengthInMinutes <= 0){
+        if (lengthInMinutes <= 0) {
             throw new IllegalArgumentException(
                     "en film kan ikke vare mindre eller lig med 0 minuter");
         }
@@ -97,7 +99,7 @@ public class Movie {
     }
 
     public void setGenre(String genre) {
-        if(genre.isEmpty() || genre.trim().isEmpty())
+        if (genre.isEmpty() || genre.trim().isEmpty())
             throw new IllegalArgumentException(
                     "En film skal have en genre"
             );
@@ -105,9 +107,9 @@ public class Movie {
     }
 
 
-public LocalDate getLastWatchedDate() {
-    return lastWatchedDate;
-}
+    public LocalDate getLastWatchedDate() {
+        return lastWatchedDate;
+    }
 
     public void markAsWatched(LocalDate date) {
         if (date == null) {
@@ -124,6 +126,14 @@ public LocalDate getLastWatchedDate() {
 
     public void setLastWatchedDate(LocalDate date) {
         markAsWatched(date);
+    }
+
+    public boolean hasBeenWatched(){
+        return lastWatchedDate != null;
+    }
+
+    public int getDaysSinceWatched(LocalDate today){
+        return (int) ChronoUnit.DAYS.between(lastWatchedDate, today);
     }
 
 

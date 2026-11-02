@@ -175,5 +175,16 @@ class MovieTest {
         );
 
         assertNull(movie.getLastWatchedDate());
+        assertFalse(movie.hasBeenWatched());
+    }
+
+    @Test
+    void markAsWatched(){
+        Movie movie = new Movie("The Hunger Games", "Gary Ross", 2012, true, 142, "Action");
+
+        movie.markAsWatched(LocalDate.now());
+
+        assertTrue(movie.hasBeenWatched());
+        assertEquals(LocalDate.now(), movie.getLastWatchedDate());
     }
 }
