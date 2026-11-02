@@ -186,4 +186,31 @@ class MovieCollectionTest {
         // Assert
         assertEquals(1, result.size());
     }
+
+    @Test
+    void getMoviesNotWatchedSince(){
+
+        // Arrange
+        MovieCollection movieCollection = new MovieCollection();
+        movieCollection.addMovie("The Hunger Games", "Gary Ross", 2012, true, 142, "Action");
+        movieCollection.addMovie("The Hunger Games 2", "Gary Ross", 2013, true, 152, "Action",LocalDate.of(2025,10,14));
+        movieCollection.addMovie("The Hunger Games 3", "Gary Ross", 2014, true, 162, "Action",LocalDate.of(2025,10,15));
+        movieCollection.addMovie("The Hunger Games 4", "Gary Ross", 2015, true, 172, "Action",LocalDate.of(2025,10,16));
+
+        // Act
+        ArrayList<Movie> result = movieCollection.getMoviesNotWatchedSince(LocalDate.of(2025, 10, 15));
+        for (Movie movie : movieCollection.getMovies()) {
+            System.out.println(
+                    movie.getTitle() + " | "
+                            + movie.getLastWatchedDate() + " | "
+                            + movie.hasBeenWatched()
+            );
+        }
+
+        // Assert
+        assertEquals(2, result.size());
+        assertEquals("The Hunger Games", result.get(0).getTitle());
+        assertEquals("The Hunger Games 2", result.get(1).getTitle());
+    }
+
 }
