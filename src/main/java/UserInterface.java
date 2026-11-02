@@ -351,17 +351,20 @@ public class UserInterface {
             System.out.println((i + 1) + ". " + matches.get(i).getTitle());
         }
 
-        int choice = readInt("vælg et nummer");
+        int choice = readInt("Vælg nummer (0 for at afbryde): ");
+
+        while (choice < 0 || choice > matches.size()) {
+            choice = readInt("Ugyldigt nummer. Prøv igen (0 for at afbryde): ");
+        }
 
         if (choice == 0) {
-            return;
-        }
-        if (choice < 1 || choice > matches.size()) {
-            System.out.println("Ugyldigt nummer.");
+            System.out.println("Markering afbrudt.");
             return;
         }
         Movie chosenMovie = matches.get(choice-1);
-        LocalDate date = readMovieDate("hvornår så du filmen? (dd-MM-yyyy):");
+        LocalDate date = readMovieDate(
+                "Hvornår så du filmen? (dd-MM-yyyy, Enter = i dag): "
+        );
 
         try {
             controller.markAsWatched(chosenMovie, date);
