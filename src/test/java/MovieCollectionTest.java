@@ -148,6 +148,7 @@ class MovieCollectionTest {
         assertEquals("Casablanca", casablanca.getTitle());
         assertEquals(1942, casablanca.getYearCreated());
     }
+
     @Test
     void addMovieWithoutDateStartsUnwatched() {
         MovieCollection movieCollection = new MovieCollection();
@@ -162,5 +163,27 @@ class MovieCollectionTest {
         Movie movie = movieCollection.getMovies().get(0);
         assertEquals("The Hunger Games", movie.getTitle());
         assertNull(movie.getLastWatchedDate());
+    }
+
+    @Test
+    void neverWatchedMovieIsIncluded() {
+        // Arrange
+        MovieCollection movieCollection = new MovieCollection();
+        movieCollection.addMovie("The Hunger Games", "Gary Ross", 2012, true, 142, "Action");
+        // Act
+        ArrayList<Movie> result = movieCollection.getMoviesNotWatchedSince(LocalDate.of(2026, 11, 2));
+        // Assert
+        assertEquals(1, result.size());
+    }
+
+    @Test
+    void movieWatchedBeforeDateIsIncluded() {
+        // Arrange
+        MovieCollection movieCollection = new MovieCollection();
+        movieCollection.addMovie("The Hunger Games", "Gary Ross", 2012, true, 142, "Action",LocalDate.of(2026,1,11));
+        // Act
+        ArrayList<Movie> result = movieCollection.getMoviesNotWatchedSince(LocalDate.of(2026, 11, 2));
+        // Assert
+        assertEquals(1, result.size());
     }
 }
