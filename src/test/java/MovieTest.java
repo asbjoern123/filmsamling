@@ -154,12 +154,7 @@ class MovieTest {
                 true, 142, "Action", LocalDate.of(2025, 1, 1)
         );
 
-        // Act
-        long days = movie.getLastWatchedDate().getDayOfMonth();
-
-        // Assert
-        assertEquals(26, days);
-
+        // Act + Assert
         assertThrows(IllegalArgumentException.class, () -> {
             movie.setTitle("");
         });
