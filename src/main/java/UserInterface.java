@@ -23,6 +23,7 @@ public class UserInterface {
                 case "3" -> searchMovies();
                 case "4" -> editMovie();
                 case "5" -> deleteMovie();
+                case "6" -> markAsWatched();
                 case "0" -> running = false;
                 default -> System.out.println("Ukendt valg: " + choice);
             }
@@ -241,13 +242,53 @@ public class UserInterface {
         }
 
     }
+    public void markAsWatched() {
+        System.out.print("Søg efter titel: ");
+        String searchText = scanner.nextLine();
 
+        ArrayList<Movie> matches = controller.searchMovies(searchText);
+
+        if (matches.isEmpty()) {
+            System.out.println("Ingen film matcher din søgning.");
+            return;
+        }
+
+        for (int i = 0; i < matches.size(); i++) {
+            System.out.println((i + 1) + ". " + matches.get(i).getTitle());
+        }
+
+        int choice = readInt("Vælg nummer (0 for at afbryde): ");
+
+        while (choice < 0 || choice > matches.size()) {
+            choice = readInt("Ugyldigt nummer. Prøv igen (0 for at afbryde): ");
+        }
+
+        if (choice == 0) {
+            System.out.println("Markering afbrudt.");
+            return;
+        }
+
+        Movie movie = matches.get(choice - 1);
+
+        LocalDate date = readMovieDate(
+                "Hvornår så du filmen? (dd-mm-åååå, Enter = i dag): "
+        );
+
+        try {
+            controller.markAsWatched(movie, date);
+            System.out.println(movie.getTitle()
+                    + " er markeret som set " + date.format(formatter) + ".");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Filmen blev ikke markeret: " + e.getMessage());
+        }
+    }
     public void printMenu() {
         System.out.println("Tast 1 for at oprette en film");
         System.out.println("Tast 2 for at vise alle film");
         System.out.println("Tast 3 for at søge efter en film");
         System.out.println("Tast 4 for at redigere en film");
         System.out.println("Tast 5 for at slette en film");
+        System.out.println("Tast 6 for at markere en film som set");
         System.out.println("Tast 0 for at stoppe programmet");
     }
 

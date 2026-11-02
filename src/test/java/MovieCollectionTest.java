@@ -141,7 +141,7 @@ class MovieCollectionTest {
 
         // Act
         assertThrows(IllegalArgumentException.class, () -> {
-            collection.editMovie(casablanca, "Casablanca 2", "Michael Curtiz", 1800, false, 102, "Drama", LocalDate.now());
+            collection.editMovie(casablanca, "Casablanca 2", "Michael Curtiz", 1800, false, 102, "Drama");
         });
 
         // Assert
