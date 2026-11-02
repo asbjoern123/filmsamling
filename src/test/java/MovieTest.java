@@ -129,8 +129,10 @@ class MovieTest {
     @Test
     void daysSinceWatchedCountsAcrossMonths() {
         // Arrange
-        Movie movie = new Movie("Jaws", "Steven Spielberg", 1975, true, 124, "Thriller",LocalDate.now());
+        Movie movie = new Movie("Jaws", "Steven Spielberg", 1975, true, 124, "Thriller", LocalDate.now());
         movie.setLastWatchedDate(LocalDate.of(2025, 9, 26));
+    }
+
     @Test
     void year1887IsRejected() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -157,7 +159,7 @@ class MovieTest {
 
         // Assert
         assertEquals(26, days);
-    }
+
         assertThrows(IllegalArgumentException.class, () -> {
             movie.setTitle("");
         });
