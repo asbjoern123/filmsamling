@@ -199,13 +199,6 @@ class MovieCollectionTest {
 
         // Act
         ArrayList<Movie> result = movieCollection.getMoviesNotWatchedSince(LocalDate.of(2025, 10, 15));
-        for (Movie movie : movieCollection.getMovies()) {
-            System.out.println(
-                    movie.getTitle() + " | "
-                            + movie.getLastWatchedDate() + " | "
-                            + movie.hasBeenWatched()
-            );
-        }
 
         // Assert
         assertEquals(2, result.size());
