@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -267,6 +268,22 @@ public class UserInterface {
                 return Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 numberFormatExceptionMessage();
+            }
+        }
+    }
+    private LocalDate readMovieDate(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+
+            if (input.isEmpty()) {
+                return LocalDate.now();
+            }
+
+            try {
+                return LocalDate.parse(input, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("\"" + input + "\" er ikke et gyldigt datoformat. Prøv igen.");
             }
         }
     }
