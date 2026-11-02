@@ -23,6 +23,8 @@ public class UserInterface {
                 case "3" -> searchMovies();
                 case "4" -> editMovie();
                 case "5" -> deleteMovie();
+                case "6" -> markAsSeen();
+                case "7" -> notSeenInTime();
                 case "0" -> running = false;
                 default -> System.out.println("Ukendt valg: " + choice);
             }
@@ -248,6 +250,8 @@ public class UserInterface {
         System.out.println("Tast 3 for at søge efter en film");
         System.out.println("Tast 4 for at redigere en film");
         System.out.println("Tast 5 for at slette en film");
+        System.out.println("Tast 6 for at markere en film som set");
+        System.out.println("Tast 7 for at finde film du ikke har set i lang tid");
         System.out.println("Tast 0 for at stoppe programmet");
     }
 
@@ -332,6 +336,51 @@ public class UserInterface {
             System.out.println("Sidst set: " + movie.getLastWatchedDate().format(formatter) + " (" + days + " dage siden)");
         }
         System.out.println();
+    }
+    public void markAsSeen(){
+        System.out.println("søg efter en film");
+        String searchText = scanner.nextLine();
+
+        ArrayList<Movie> matches = controller.searchMovies(searchText);
+
+        if(matches.isEmpty()){
+            System.out.println("igen film fundet");
+            return;
+        }
+        for (int i = 0; i < matches.size(); i++) {
+            System.out.println((i + 1) + ". " + matches.get(i).getTitle());
+        }
+
+        int choice = readInt("vælg et nummer");
+
+        if (choice == 0) {
+            return;
+        }
+        if (choice < 1 || choice > matches.size()) {
+            System.out.println("Ugyldigt nummer.");
+            return;
+        }
+        Movie chosenMovie = matches.get(choice-1);
+        LocalDate date = readMovieDate("hvornår så du filmen? (dd-MM-yyyy):");
+
+        try {
+            controller.markAsWatched(chosenMovie, date);
+            System.out.println("Filmen er markeret som set.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Filmen blev ikke markeret: " + e.getMessage());
+        }
+    }
+    public void notSeenInTime(){
+        int days = readInt("hvor mange dage siden sidst set?:");
+
+        ArrayList<Movie> moviesNotWatched = controller.getMoviesNotWatchedForDays(days);
+        if(moviesNotWatched.isEmpty()) {
+            System.out.println("der er igen film sidst set for " + days + "siden");
+        }else{
+              for(Movie movie : moviesNotWatched){
+                  printMovieInfo(movie);
+            }
+        }
     }
 }
 
