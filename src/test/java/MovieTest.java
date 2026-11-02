@@ -129,12 +129,11 @@ class MovieTest {
     @Test
     void daysSinceWatchedCountsAcrossMonths() {
         // Arrange
-        Movie movie = new Movie("Jaws", "Steven Spielberg", 1975, true, 124, "Thriller", LocalDate.now());
+        Movie movie = new Movie("Jaws", "Steven Spielberg", 1975, true, 124, "Thriller");
         movie.setLastWatchedDate(LocalDate.of(2025, 9, 30));
 
         // Act + Assert
         assertEquals(26, movie.getDaysSinceWatched(LocalDate.of(2025, 10, 26)));
-
     }
 
 
@@ -182,9 +181,9 @@ class MovieTest {
     void markAsWatched(){
         Movie movie = new Movie("The Hunger Games", "Gary Ross", 2012, true, 142, "Action");
 
-        movie.markAsWatched(LocalDate.now());
+        movie.markAsWatched(LocalDate.of(2024, 9, 23));
 
         assertTrue(movie.hasBeenWatched());
-        assertEquals(LocalDate.now(), movie.getLastWatchedDate());
+        assertEquals(LocalDate.of(2024, 9, 23), movie.getLastWatchedDate());
     }
 }

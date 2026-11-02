@@ -12,19 +12,12 @@ public class MovieCollection {
         return movies;
     }
 
-    public void addMovie(String title, String director, int yearCreated,
-                         boolean inColor, int lengthInMinutes, String genre) {
-        movies.add(new Movie(
-                title, director, yearCreated,
-                inColor, lengthInMinutes, genre
-        ));
+    public void addMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre) {
+        movies.add(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre));
     }
-    public void addMovie(String title, String director, int yearCreated,
-                         boolean inColor, int lengthInMinutes, String genre, LocalDate date) {
-        movies.add(new Movie(
-                title, director, yearCreated,
-                inColor, lengthInMinutes, genre
-        ));
+
+    public void addMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre, LocalDate date) {
+        movies.add(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre, date));
     }
 
 
@@ -75,7 +68,7 @@ public class MovieCollection {
         return true;
     }
 
-    public ArrayList<Movie> searchMovies(String searchText){
+    public ArrayList<Movie> searchMovies(String searchText) {
         ArrayList<Movie> matches = new ArrayList<>();
 
         for (Movie movie : movies) {
@@ -90,7 +83,9 @@ public class MovieCollection {
         ArrayList<Movie> matches = new ArrayList<>();
 
         for (Movie movie : movies) {
-            if (!movie.hasBeenWatched() || movie.getLastWatchedDate().isBefore(date)) {
+            if (!movie.hasBeenWatched()) {
+                matches.add(movie);
+            } else if (movie.getLastWatchedDate().isBefore(date)) {
                 matches.add(movie);
             }
         }
