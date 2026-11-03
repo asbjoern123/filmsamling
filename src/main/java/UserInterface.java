@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -15,6 +16,7 @@ public class UserInterface {
     public void startProgram() {
         System.out.println("Velkommen til min filmsamling");
         while (running) {
+            loadMovies();
             printMenu();
             String choice = scanner.nextLine().trim();
             switch (choice) {
@@ -383,6 +385,19 @@ public class UserInterface {
               for(Movie movie : moviesNotWatched){
                   printMovieInfo(movie);
             }
+        }
+    }
+
+    private void loadMovies() {
+        try {
+            int count = controller.loadMovies();
+            System.out.println(count + " film er indlæst.");
+            int skipped = controller.getSkippedLineCount();
+            if (skipped > 0) {
+                System.out.println("Advarsel: " + skipped + " linje(r) i filen kunne ikke læses og er sprunget over.");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Der er ingen gemt filmsamling endnu – du starter med en tom samling.");
         }
     }
 }
