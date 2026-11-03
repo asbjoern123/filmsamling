@@ -42,11 +42,12 @@ java -cp target/classes Main
 - US10 – Robust input
 - US11 – Kun gyldige film
 - US12 – Angiv dato for set
-
-**Mangler:**
 - US13 – Gem/indlæs samlingen fra fil
 - US14 – Gem kun ved ændringer
 - US15 – Lag i koden (packages)
+
+**Mangler:**
+
 - US16 – Alfabetisk visning
 - US17 – Vælg sorteringsfelt
 - US18 – Sortér efter to felter (ekstraopgave)
