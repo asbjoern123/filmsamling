@@ -1,6 +1,7 @@
-package domainmodel;
+package datasource;
 
-import datasource.FileHandler;
+import domainmodel.Movie;
+import domainmodel.MovieCollection;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import java.io.File;
