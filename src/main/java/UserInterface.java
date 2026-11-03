@@ -408,7 +408,7 @@ public class UserInterface {
                System.out.println("Filmsamlingen er gemt");
             } else System.out.println("Ingen ændringer at gemme");
         } catch (FileNotFoundException e){
-            System.out.println("Filmsamlingsfilen kunne ikke findes");
+            System.out.println("Filmsamlingen kunne ikke gemmes: " + e.getMessage());
         }
 
     }
