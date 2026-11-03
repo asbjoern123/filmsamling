@@ -3,8 +3,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
-.movies.csv
-.test-movies.csv
+movies.csv
+test-movies.csv
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
