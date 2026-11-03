@@ -81,18 +81,19 @@ public class FileHandlerTest {
         }
         FileHandler fileHandler = new FileHandler(TEST_FILE);
 
+        assertFalse(file.exists());
         assertThrows(FileNotFoundException.class, () -> {
             fileHandler.loadMovies();
         });
     }
     @Test
     void invalidLinesAreSkipped() throws FileNotFoundException {
-        PrintStream skriver = new PrintStream(new File(TEST_FILE));
-        skriver.println("title;author;yearPublished;isHardcover;pages;genre;lastBorrowed");
-        skriver.println("Dune;Frank Herbert;1965;true;412;Sci-fi;");
-        skriver.println("Kun;to;felter");
-        skriver.println("Titel;Forfatter;ikkeEtTal;true;300;Genre;");
-        skriver.close();
+        PrintStream output = new PrintStream(new File(TEST_FILE));
+        output.println("title;director;yearCreated;inColor;lengthInMinutes;genre;lastWatched");
+        output.println("Dune;Denis Villeneuve;2021;true;155;Sci-fi;");
+        output.println("Kun;to;felter");
+        output.println("Titel;Forfatter;ikkeEtTal;true;300;Genre;");
+        output.close();
 
         FileHandler fileHandler = new FileHandler(TEST_FILE);
         ArrayList<Movie> movies = fileHandler.loadMovies();
@@ -100,7 +101,6 @@ public class FileHandlerTest {
         assertEquals(1, movies.size());
         assertEquals("Dune",movies.get(0).getTitle());
         assertEquals(2, fileHandler.getSkippedLineCount());
-
     }
 
 }
