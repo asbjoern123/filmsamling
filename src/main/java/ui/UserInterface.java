@@ -32,6 +32,7 @@ public class UserInterface {
                 case "5" -> deleteMovie();
                 case "6" -> markAsSeen();
                 case "7" -> notSeenInTime();
+                case "8" -> sortBy();
                 case "0" -> running = false;
                 default -> System.out.println("Ukendt valg: " + choice);
             }
@@ -394,7 +395,7 @@ public class UserInterface {
         }
     }
 
-    private void loadMovies() {
+    public void loadMovies() {
         try {
             int count = controller.loadMovies();
             System.out.println(count + " film er indlæst.");
@@ -407,7 +408,7 @@ public class UserInterface {
         }
     }
 
-    private void saveMoviesIfChanged(){
+    public void saveMoviesIfChanged(){
         try {
            if (controller.saveMoviesIfChanged()){
                System.out.println("Filmsamlingen er gemt");
@@ -415,6 +416,9 @@ public class UserInterface {
         } catch (FileNotFoundException e){
             System.out.println("Filmsamlingen kunne ikke gemmes: " + e.getMessage());
         }
+
+    }
+    public void sortBy(){
 
     }
 }
