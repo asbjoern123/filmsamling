@@ -22,4 +22,4 @@
 | P | gemmer kun ved ændring                                                                              | ja        | US14 , `domainmodel.Controller`                        |
 | S | Der er skrevet JUnit tests på domainmodel.Movie                                                                 | Ja       | Del 5 , `MovieTest.java`                                       |
 | S | Der er skrevet JUnit tests på domainmodel.MovieCollection                                                       | Ja       | Del 5 , `MovieCollectionTest.java`                             |
-| S | Lag i koden (packages: ui/domainmodel/datasource) | Nej      | US15, `` (ikke lavet endnu)                                    |
+| S | Lag i koden (packages: ui/domainmodel/datasource) | Ja      | US15                                    |
