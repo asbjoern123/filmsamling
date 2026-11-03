@@ -1,4 +1,5 @@
-import org.junit.jupiter.api.Assertions;
+import domainmodel.Movie;
+import domainmodel.MovieCollection;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
