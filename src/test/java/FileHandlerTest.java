@@ -98,7 +98,7 @@ public class FileHandlerTest {
         ArrayList<Movie> movies = fileHandler.loadMovies();
 
         assertEquals(1, movies.size());
-        assertEquals("dune",movies.get(0).getTitle());
+        assertEquals("Dune",movies.get(0).getTitle());
         assertEquals(2, fileHandler.getSkippedLineCount());
 
     }
