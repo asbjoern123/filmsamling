@@ -1,5 +1,5 @@
-import domainmodel.Movie;
-import domainmodel.MovieCollection;
+package domainmodel;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
