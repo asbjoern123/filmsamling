@@ -1,8 +1,6 @@
 package domainmodel;
 
 import java.time.LocalDate;
-
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Movie implements Comparable<Movie> {
@@ -14,7 +12,6 @@ public class Movie implements Comparable<Movie> {
     private String genre;
     private static final int FIRST_MOVIE_YEAR = 1888;
     private LocalDate lastWatchedDate = null;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     //NY constructor uden dato
     public Movie(String title, String director, int yearCreated,
@@ -32,7 +29,7 @@ public class Movie implements Comparable<Movie> {
         setTitle(title);
         setDirector(director);
         setYearCreated(yearCreated);
-        this.inColor = inColor;
+        setInColor(inColor);
         setLengthInMinutes(lengthInMinutes);
         setGenre(genre);
         setLastWatchedDate(lastWatchedDate);

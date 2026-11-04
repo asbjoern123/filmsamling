@@ -1,7 +1,6 @@
 package ui;
 import domainmodel.Controller;
 import domainmodel.Movie;
-import domainmodel.MovieCollection;
 import domainmodel.SortField;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -331,7 +330,7 @@ public class UserInterface {
     }
     private void printMovieInfo(Movie movie){
         System.out.println("titel: " + movie.getTitle());
-        System.out.println("director: " + movie.getDirector());
+        System.out.println("instruktør: " + movie.getDirector());
         System.out.println("udgivelses år: " + movie.getYearCreated());
         System.out.println("i farve: " + (movie.isInColor() ? "farvet" : "sorthvid"));
         System.out.println("længede i min: " + movie.getLengthInMinutes());
