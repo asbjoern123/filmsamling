@@ -241,4 +241,23 @@ class MovieCollectionTest {
         assertEquals("Zebra", result.get(2).getTitle());
     }
 
+    @Test
+    void sortingDoesNotChangeOriginalOrder() {
+        // Arrange
+        MovieCollection movieCollection = new MovieCollection();
+        movieCollection.addMovie("Zebra", "Steven Spielberg", 2000, true, 120, "Thriller");
+        movieCollection.addMovie("Jaws", "Steven Spielberg", 2000, true, 120, "Thriller");
+        movieCollection.addMovie("Alien", "Alfred Hitchcock", 1990, true, 90, "Gyser");
+
+        // Act
+        movieCollection.getMoviesSorted(new TitleComparator());
+        ArrayList<Movie> original = movieCollection.getMovies();
+
+        // Assert
+        assertEquals(3, original.size());
+        assertEquals("Zebra", original.get(0).getTitle());
+        assertEquals("Jaws", original.get(1).getTitle());
+        assertEquals("Alien", original.get(2).getTitle());
+    }
+
 }
