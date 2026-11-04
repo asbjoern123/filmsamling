@@ -125,9 +125,6 @@ public class Movie implements Comparable<Movie> {
         this.lastWatchedDate = date;
     }
 
-    public void markAsWatched(){
-        this.lastWatchedDate = LocalDate.now();
-    }
 
     public void setLastWatchedDate(LocalDate date) {
         markAsWatched(date);
