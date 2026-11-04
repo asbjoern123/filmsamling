@@ -232,7 +232,7 @@ class MovieCollectionTest {
         movieCollection.addMovie("Alien", "Alfred Hitchcock", 1990, true, 90, "Gyser");
 
         // Act
-        ArrayList<Movie> result = movieCollection.getMoviesSortedByTitle();
+        ArrayList<Movie> result = movieCollection.getMoviesSortedByTitel();
 
         // Assert
         assertEquals(3, result.size());
