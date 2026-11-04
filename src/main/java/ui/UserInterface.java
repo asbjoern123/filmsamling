@@ -409,46 +409,58 @@ public class UserInterface {
         }
     }
 
-    public void saveMoviesIfChanged(){
+    public void saveMoviesIfChanged() {
         try {
-           if (controller.saveMoviesIfChanged()){
-               System.out.println("Filmsamlingen er gemt");
+            if (controller.saveMoviesIfChanged()) {
+                System.out.println("Filmsamlingen er gemt");
             } else System.out.println("Ingen ændringer at gemme");
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Filmsamlingen kunne ikke gemmes: " + e.getMessage());
         }
-
     }
-    public void showSortBy(){
-        System.out.println("Sorter efter:");
-        System.out.println("1 Titel:");
-        System.out.println("2 director:");
-        System.out.println("3 fra år:");
-        System.out.println("4 længde i min:");
-        System.out.println("5 genre: ");
 
-        String valg = scanner.nextLine();
 
-        SortField field = switch (valg) {
-            case "1" -> SortField.TITLE;
-            case "2" -> SortField.DIRECTOR;
-            case "3" -> SortField.YEAR;
-            case "4" -> SortField.LENGTH;
-            case "5" -> SortField.GENRE;
-            default -> null;
-        };
-        if (field == null){
-            System.out.println("det kan du ikke sortere efter");
-        }else {
+        public void showSortBy() {
+            SortField[] fields = SortField.values();
+
+            System.out.println("Sortér efter:");
+            for (int i = 0; i < fields.length; i++) {
+                System.out.println((i + 1) + ": " + danskLabel(fields[i]));
+            }
+
+            String valg = scanner.nextLine();
+            int index;
+            try {
+                index = Integer.parseInt(valg) - 1;
+            } catch (NumberFormatException e) {
+                index = -1;
+            }
+
+            if (index < 0 || index >= fields.length) {
+                System.out.println("Det kan du ikke sortere efter.");
+                return;
+            }
+
+            SortField field = fields[index];
             ArrayList<Movie> movies = controller.getMoviesSortedBy(field);
 
-            for (Movie movie : movies){
+            for (Movie movie : movies) {
                 printMovieInfo(movie);
             }
         }
 
+        private String danskLabel(SortField field) {
+            return switch (field) {
+                case TITLE -> "Titel";
+                case DIRECTOR -> "Forfatter";
+                case YEAR -> "Udgivelsesår";
+                case LENGTH -> "Sidetal";
+                case GENRE -> "Genre";
+            };
+        }
+
     }
-}
+
 
 
 
