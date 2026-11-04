@@ -11,10 +11,10 @@ import java.util.Scanner;
 
 
 public class UserInterface {
-    Scanner scanner = new Scanner(System.in);
-    Controller controller = new Controller();
-    public boolean running = true;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private Scanner scanner = new Scanner(System.in);
+    private Controller controller = new Controller();
+    private boolean running = true;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 
     public void startProgram() {
@@ -421,7 +421,7 @@ public class UserInterface {
     public void showSortBy(){
         System.out.println("Sorter efter:");
         System.out.println("1 Titel:");
-        System.out.println("2 director:");
+        System.out.println("2 instruktør:");
         System.out.println("3 fra år:");
         System.out.println("4 længde i min:");
         System.out.println("5 genre: ");
