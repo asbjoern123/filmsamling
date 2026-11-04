@@ -36,21 +36,30 @@ public class ComparatorTest {
     void directorComparatorSortsAlphabetically(){
 
         // Arrange
+        DirectorComparator comparator = new DirectorComparator();
 
         // Act
+        int forward = comparator.compare(movie1, movie2);
+        int backward = comparator.compare(movie2, movie1);
 
         // Assert
-
+        assertTrue(forward < 0);
+        assertTrue(backward > 0);
 
     }
     @Test
     void genreComparatorSortsAlphabetically(){
 
         // Arrange
+        GenreComparator comparator = new GenreComparator();
 
         // Act
+        int forward = comparator.compare(movie1, movie2);
+        int backward = comparator.compare(movie2, movie1);
 
         // Assert
+        assertTrue(forward < 0);
+        assertTrue(backward > 0);
 
 
     }
@@ -58,11 +67,15 @@ public class ComparatorTest {
     void yearComparatorSortsOldestFirst(){
 
         // Arrange
+        YearComparator comparator = new YearComparator();
 
         // Act
+        int forward = comparator.compare(movie1, movie2);
+        int backward = comparator.compare(movie2, movie1);
 
         // Assert
-
+        assertTrue(forward < 0);
+        assertTrue(backward > 0);
 
     }
 
@@ -70,10 +83,15 @@ public class ComparatorTest {
     void lengthComparatorSortsShortestFirst(){
 
         // Arrange
+        LengthComparator comparator = new LengthComparator();
 
         // Act
+        int forward = comparator.compare(movie1, movie2);
+        int backward = comparator.compare(movie2, movie1);
 
         // Assert
+        assertTrue(forward < 0);
+        assertTrue(backward > 0);
 
 
     }
@@ -82,11 +100,15 @@ public class ComparatorTest {
     void titleComparatorIgnoresCase(){
 
         // Arrange
+        TitleComparator comparator = new TitleComparator();
+        movie1.setTitle("Alien");
+        movie2.setTitle("ALIEN");
 
         // Act
+        int result = comparator.compare(movie1, movie2);
 
         // Assert
-
+        assertEquals(0, result);
 
     }
     @Test
