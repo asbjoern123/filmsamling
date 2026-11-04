@@ -1,6 +1,6 @@
 package domainmodel;
 
-public enum sortField {
+public enum SortField {
     TITLE,
     DIRECTOR,
     YEAR,

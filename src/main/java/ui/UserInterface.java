@@ -2,6 +2,8 @@ package ui;
 
 import domainmodel.Controller;
 import domainmodel.Movie;
+import domainmodel.MovieCollection;
+import domainmodel.SortField;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -32,7 +34,7 @@ public class UserInterface {
                 case "5" -> deleteMovie();
                 case "6" -> markAsSeen();
                 case "7" -> notSeenInTime();
-                case "8" -> sortBy();
+                case "8" -> showSortBy();
                 case "0" -> running = false;
                 default -> System.out.println("Ukendt valg: " + choice);
             }
@@ -261,6 +263,7 @@ public class UserInterface {
         System.out.println("Tast 5 for at slette en film");
         System.out.println("Tast 6 for at markere en film som set");
         System.out.println("Tast 7 for at finde film du ikke har set i lang tid");
+        System.out.println("Tast 8 for at vise film sorteret");
         System.out.println("Tast 0 for at stoppe programmet");
     }
 
@@ -418,7 +421,33 @@ public class UserInterface {
         }
 
     }
-    public void sortBy(){
+    public void showSortBy(){
+        System.out.println("Sorter efter:");
+        System.out.println("1 Titel:");
+        System.out.println("2 director:");
+        System.out.println("3 fra år:");
+        System.out.println("4 længde i min:");
+        System.out.println("5 genre: ");
+
+        String valg = scanner.nextLine();
+
+        SortField field = switch (valg) {
+            case "1" -> SortField.TITLE;
+            case "2" -> SortField.DIRECTOR;
+            case "3" -> SortField.YEAR;
+            case "4" -> SortField.LENGTH;
+            case "5" -> SortField.GENRE;
+            default -> null;
+        };
+        if (field == null){
+            System.out.println("det kan du ikke sortere efter");
+        }else {
+            ArrayList<Movie> movies = controller.getMoviesSortedBy(field);
+
+            for (Movie movie : movies){
+                printMovieInfo(movie);
+            }
+        }
 
     }
 }
