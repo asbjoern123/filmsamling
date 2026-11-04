@@ -1,10 +1,7 @@
 package ui;
-
 import domainmodel.Controller;
 import domainmodel.Movie;
-import domainmodel.MovieCollection;
 import domainmodel.SortField;
-
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
