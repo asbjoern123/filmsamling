@@ -2,6 +2,9 @@ package domainmodel;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ComparatorTest {
@@ -84,6 +87,30 @@ public class ComparatorTest {
 
         // Assert
 
+
+    }
+    @Test
+    void getMoviesSortedSortsByTitel(){
+        MovieCollection movieCollection = new MovieCollection();
+        movieCollection.addMovie("Zebra", "Forfatter A", 2000, true, 90,"Drama");
+        movieCollection.addMovie("Alfa", "Forfatter B", 1999, true, 90,"Drama");
+
+        ArrayList<Movie> sorted = movieCollection.getMoviesSorted(new TitleComparator());
+
+
+        assertEquals("Alfa", sorted.get(0).getTitle());
+        assertEquals("Zebra", sorted.get(1).getTitle());
+    }
+    @Test
+    void getMoviesSortedByReturnsSortedList() {
+        Controller controller = new Controller();
+        controller.addMovie("Zebra", "Forfatter A", 2000, true,300, "Drama");
+        controller.addMovie("Alfa", "Forfatter B", 1999, true, 250, "Drama");
+
+        ArrayList<Movie> sorted = controller.getMoviesSortedBy(SortField.TITLE);
+
+        assertEquals("Alfa", sorted.get(0).getTitle());
+        assertEquals("Zebra", sorted.get(1).getTitle());
 
     }
 
