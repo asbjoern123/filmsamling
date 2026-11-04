@@ -188,4 +188,21 @@ class MovieTest {
         assertTrue(movie.hasBeenWatched());
         assertEquals(LocalDate.of(2024, 9, 23), movie.getLastWatchedDate());
     }
+
+    @Test
+    void compareTo(){
+        //Arrange
+        Movie movie1 = new Movie("Alien", "Alfred Hitchcock", 1990, true, 90, "Gyser");
+        Movie movie2 = new Movie("Jaws", "Steven Spielberg", 2000, true, 120, "Thriller");
+
+        //Act
+        int result = movie1.compareTo(movie2);
+        int result2 = movie2.compareTo(movie1);
+
+        //Assert
+        assertTrue(result < 0);
+        assertTrue(result2 > 0);
+    }
+
+
 }

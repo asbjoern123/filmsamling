@@ -223,4 +223,22 @@ class MovieCollectionTest {
 
     }
 
+    @Test
+    void getMoviesSortedByTitleReturnsAlphabeticalOrder() {
+        // Arrange
+        MovieCollection movieCollection = new MovieCollection();
+        movieCollection.addMovie("Zebra", "Steven Spielberg", 2000, true, 120, "Thriller");
+        movieCollection.addMovie("Jaws", "Steven Spielberg", 2000, true, 120, "Thriller");
+        movieCollection.addMovie("Alien", "Alfred Hitchcock", 1990, true, 90, "Gyser");
+
+        // Act
+        ArrayList<Movie> result = movieCollection.getMoviesSortedByTitle();
+
+        // Assert
+        assertEquals(3, result.size());
+        assertEquals("Alien", result.get(0).getTitle());
+        assertEquals("Jaws", result.get(1).getTitle());
+        assertEquals("Zebra", result.get(2).getTitle());
+    }
+
 }
