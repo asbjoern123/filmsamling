@@ -1,7 +1,6 @@
 package ui;
 import domainmodel.Controller;
 import domainmodel.Movie;
-import domainmodel.MovieCollection;
 import domainmodel.SortField;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -12,10 +11,10 @@ import java.util.Scanner;
 
 
 public class UserInterface {
-    Scanner scanner = new Scanner(System.in);
-    Controller controller = new Controller();
-    public boolean running = true;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private Scanner scanner = new Scanner(System.in);
+    private Controller controller = new Controller();
+    private boolean running = true;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 
     public void startProgram() {
@@ -331,7 +330,7 @@ public class UserInterface {
     }
     private void printMovieInfo(Movie movie){
         System.out.println("titel: " + movie.getTitle());
-        System.out.println("director: " + movie.getDirector());
+        System.out.println("instruktør: " + movie.getDirector());
         System.out.println("udgivelses år: " + movie.getYearCreated());
         System.out.println("i farve: " + (movie.isInColor() ? "farvet" : "sorthvid"));
         System.out.println("længede i min: " + movie.getLengthInMinutes());
@@ -417,7 +416,6 @@ public class UserInterface {
         } catch (FileNotFoundException e) {
             System.out.println("Filmsamlingen kunne ikke gemmes: " + e.getMessage());
         }
-    }
 
 
         public void showSortBy() {
@@ -460,7 +458,6 @@ public class UserInterface {
         }
 
     }
-
 
 
 
