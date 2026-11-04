@@ -133,7 +133,7 @@ public class UserInterface {
     }
 
     public void showAllMovies() {
-        ArrayList<Movie> movies = controller.getMovies();
+        ArrayList<Movie> movies = controller.getMoviesSortedBy(SortField.TITLE);
         if (movies.isEmpty()) {
             System.out.println("Filmlisten er tom");
         } else {

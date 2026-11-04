@@ -46,8 +46,8 @@ java -cp target/classes Main
 - US14 – Gem kun ved ændringer
 - US15 – Lag i koden (packages)
 
-**Mangler:**
+- US17 – Vælg sorteringsfelt
+  **Mangler:**
 
 - US16 – Alfabetisk visning
-- US17 – Vælg sorteringsfelt
 - US18 – Sortér efter to felter (ekstraopgave)

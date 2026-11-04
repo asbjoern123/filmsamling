@@ -10,9 +10,9 @@
 | F | Slet en film                                                                                        | Ja       | US6, `ui.UserInterface`                                                                  |
 | F | Find film du ikke har set længe               | Ja       | US9, `ui.UserInterface`                                                                  |
 | F | Markér en film som set                        | Ja       | US8, `ui.UserInterface`                                                                  |
-| F | Vis film alfabetisk ved "Vis alle film"        | Nej      | US16, `` (ikke lavet endnu)                                                              |
+| F | Vis film alfabetisk ved "Vis alle film"        | ja       | US16, `ui.UserInterface`                                                                 |
 | F | Gem og indlæs samlingen fra fil                | Ja       | US13, `FileHandler`                                                                      |
-| F | Vælg sorteringsfelt (menuvalg 8)                | ja        | US17, `ui.UserInterface`                                                                 |
+| F | Vælg sorteringsfelt (menuvalg 8)                | ja       | US17, `ui.UserInterface`                                                                 |
 | F | Sortér efter to felter (ekstraopgave)           | Nej      | US18, `` (ikke lavet endnu)                                                              |
 | U | Ved ja/nej-spørgsmål accepteres ja, j, nej og n uanset store og små bogstaver; andre svar giver en besked, og man bliver spurgt igen | ja       | US10 , `ui.UserInterface`                                                                |
 | R | Bogstaver ved tal-input og ugyldige filmnumre giver en fejlbesked og et nyt forsøg                  | Ja       | ui.UserInterface.readInt og filmvalg                                                     |
